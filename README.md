@@ -32,7 +32,7 @@ cd PiWRIS
 #### 2. Install using Conda
 
 ```bash
-conda install PiWRIS -c conda-forge
+conda install piwris -c conda-forge
 ```
 
 ## Usage
