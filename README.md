@@ -41,7 +41,7 @@ conda install pywris -c conda-forge
 
 Contributions are highly welcome! If you encounter issues or have suggestions, please feel free to open an issue. Contributions should follow the guidelines specified in Contributing.md.
 
-1. Fork the repository.
+1. Clone/Fork the repository.
 2. Create a new branch.
 3. Submit a pull request for review.
 
