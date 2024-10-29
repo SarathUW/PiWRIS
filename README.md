@@ -56,3 +56,7 @@ You are free to use, copy, modify, merge, publish, distribute, sublicense, and/o
 See the full text in [LICENSE](./LICENSE) for more details.
 
 **Disclaimer**: The India WRIS data accessed by this package is provided and owned by the Ministry of Water Resources, Government of India. PyWRIS is an independent project and is not affiliated with or endorsed by the Ministry of Water Resources, Government of India. Please ensure compliance with the terms of use for any data accessed through the India WRIS platform.
+
+
+## Team Member
+Shahzaib
