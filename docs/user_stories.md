@@ -8,3 +8,7 @@ Diaz is a policy maker for the Goa state government. They want to use PyWRIS to 
 ## User Story 3
 
 Ben is an college student. They are a Geology major and is taking classes on hydrology. They want to use this software to dowload a subset of the hydrology data on the WRIS website for a final group project. They need a quick and easy way to download data that can be accessed on various devices (e.g., laptop, phone) and shared with multiple people. They don't have much technical skill and want a software that is easy to learn.
+
+## User Story 4
+
+Jonson is a farmer in Maharashtra. Jonson relies on seasonal rainfall and local river flows to irrigate his crops, but with unpredictable weather, he faces challenges planning for water availability. Jonson wants to use PyWRIS to access river discharge data and rainfall trends for his region, helping him make more informed decisions about when to plant and irrigate his crops. Jonson is not tech-savvy and needs a simple, user-friendly tool with clear instructions, allowing him to view the data easily on his mobile phone and use it for his day-to-day planning.
