@@ -1,7 +1,6 @@
 ## User Story 1
 Sam is a researcher. Sam wants model a reservoir. To callibrate the model Sam wants to fetch reservoir storage data. Sam has been using Python for more than 4 years and is technically advanced.
 
-
 ## User Story 2
 Diaz is a policy maker for the Goa state government. They want to use PyWRIS to analyse large volumes of groundwater data to better manage private wells in the state. They require the tool to facilitate large volume data download, and filters for querying groundwater data based on the state. They are part of an organisation with tech literate employees. Hence their user skill is high.
 
@@ -20,3 +19,6 @@ Alex is a data technician working for a government agency that maintains water r
 ## User Story 6
 
 Dev is a housing developer in South India. He wants to know where large bodies of water and dams are located, as well as how much the water changes throughout the year, so he can identify plots of land where he can develop apartment complexes. Dev needs a way to visualize the location and size of these bodies of water and would like a way to merge this data with existing data on housing locations. He has advanced technical knowledge in his company's software and can transfer some of these skills to other software.
+
+## User Story 7
+Avantika is a conservationist who specializes in sharing climate change information with the general public. She wants to be able to see water trends in different regions of India and use that information to guide presentations and blog posts she shares with the public. Avantika wants to use PyWRIS to track changes in water level across states and follow patterns in rainfall over time. Avantika is very technically skilled but appreciates clear and throrough documentation.
