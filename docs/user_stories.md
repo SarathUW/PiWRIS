@@ -1,5 +1,5 @@
-### User Story 1
-Sam is a researcher.
+## User Story 1
+Sam is a researcher. Sam wants model a reservoir. To callibrate the model Sam wants to fetch reservoir storage data. Sam has been using Python for more than 4 years and is technically advanced.
 
 
 ## User Story 2
