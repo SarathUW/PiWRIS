@@ -7,7 +7,7 @@ Diaz is a policy maker for the Goa state government. They want to use PyWRIS to 
 
 ## User Story 3
 
-Ben is an college student. They are a Geology major and is taking classes on hydrology. They want to use this software to dowload a subset of the hydrology data on the WRIS website for a final group project. They need a quick and easy way to download data that can be accessed on various devices (e.g., laptop, phone) and shared with multiple people. They don't have much technical skill and want a software that is easy to learn.
+Ben is an college student. They are a Geology major and are taking classes on hydrology. They want to use this software to dowload a subset of the hydrology data on the WRIS website for a final group project. They need a quick and easy way to download data that can be accessed on various devices (e.g., laptop, phone) and shared with multiple people. They don't have much technical skill and want a software that is easy to learn.
 
 ## User Story 4
 
@@ -16,3 +16,7 @@ Jonson is a farmer in Maharashtra. Jonson relies on seasonal rainfall and local 
 ## User Story 5
 
 Alex is a data technician working for a government agency that maintains water resource tools. When India WRIS updates its website or links, Alex updates PyWRIS to keep data access working smoothly. Alex needs a straightforward way to update web links and manage any new login requirements. Clear documentation and a quick way to adjust URLs and credentials would make Alex's job easier.
+
+## User Story 6
+
+Dev is a housing developer in South India. He wants to know where large bodies of water and dams are located, as well as how much the water changes throughout the year, so he can identify plots of land where he can develop apartment complexes. Dev needs a way to visualize the location and size of these bodies of water and would like a way to merge this data with existing data on housing locations. He has advanced technical knowledge in his company's software and can transfer some of these skills to other software.
