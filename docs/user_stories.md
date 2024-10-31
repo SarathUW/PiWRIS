@@ -12,3 +12,7 @@ Ben is an college student. They are a Geology major and is taking classes on hyd
 ## User Story 4
 
 Jonson is a farmer in Maharashtra. Jonson relies on seasonal rainfall and local river flows to irrigate his crops, but with unpredictable weather, he faces challenges planning for water availability. Jonson wants to use PyWRIS to access river discharge data and rainfall trends for his region, helping him make more informed decisions about when to plant and irrigate his crops. Jonson is not tech-savvy and needs a simple, user-friendly tool with clear instructions, allowing him to view the data easily on his mobile phone and use it for his day-to-day planning.
+
+## User Story 5
+
+Alex is a data technician working for a government agency that maintains water resource tools. When India WRIS updates its website or links, Alex updates PyWRIS to keep data access working smoothly. Alex needs a straightforward way to update web links and manage any new login requirements. Clear documentation and a quick way to adjust URLs and credentials would make Alex's job easier.
