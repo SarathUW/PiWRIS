@@ -14,3 +14,22 @@
    - **Usage:** Users specify parameters to retrieve the requested dataset.
    - **Side Effects:** Large downloads (like raster data) may take time or exceed request limits if the server restricts requests.
 
+#### **Name**: WRIS India Database  
+
+   - **What it does**: Provides water related information such as water elevation, discharge for lakes, rivers and reservoirs.  
+
+   - **Inputs**: ID of the reservoir, lake or river, time of interest, variable of interest.  
+
+   - **Outputs**: Gives a timeseries data for the desired parameters  
+
+
+#### **Name**: Search component  
+
+  - **What it does**: Search within the database with desired parameters  
+
+  - **Inputs**: Time filter component and space filter component, interested variable or dataset (optional)  
+
+  - **Ouptuts**: Outputs number of data points with respect to the requested parameters.  
+
+
+
