@@ -25,3 +25,28 @@ Avantika is a conservationist who specializes in sharing climate change informat
 
 ## User Story 8
 John is an archivist at the National Digital Library of India. He wants to set up an automated process where water resources data from many sources are fetched daily and stored. John requires a easy to use tool to access India WRIS data that is easy to convert to a daily cronjob. The tool must also be capable of doing some basic data conversions. John has a moderate level of technical literacy and is capable of setting up simple automations and scripts. 
+
+## User Story 9
+Rakesh is an app developer creating a mobile application for local farmers in Andhra Pradesh to monitor weather and water resources. Rakesh wants to integrate data on rainfall and river discharge from PyWRIS into his app. He has advanced technical skills and needs a well-documented API and the ability to access data that updates regularly for real-time usage.
+
+## User Story 10
+Siddharth is a researcher specializing in aquifer management. He needs detailed groundwater data, such as aquifer disposition and groundwater quality, for various regions. Siddharth wants to use PyWRIS to access this information to create detailed models of groundwater recharge and depletion. He is very technically skilled and prefers tools with extensive API documentation.
+
+## User Story 11
+Imran is a university professor teaching environmental science. He wants to develop educational modules using real-world data on water quality and pollution sources from IndiaWRIS. Imran needs PyWRIS to simplify the extraction of data on parameters like BOD, COD, and heavy metals for various rivers. He seeks a tool that's easy to use for both himself and his students.
+
+## User Story 12
+Geeta is a government official working on rural development projects in drought-prone areas of Maharashtra. She needs data on land degradation, land use patterns, and water scarcity from IndiaWRIS to design sustainable land management initiatives. Geeta wants PyWRIS to offer simple data downloads and compatibility with Excel, as her technical skills are basic.
+
+## User Story 13
+Arun is an ecologist researching the impact of deforestation on local water resources in the Eastern Ghats. He needs data on historical and current tree cover, deforestation rates, and associated rainfall patterns from IndiaWRIS. Arun requires PyWRIS to access forest and tree cover datasets to integrate with his environmental models. He is proficient in data analysis and Python.
+
+## User Story 14
+Nisha is a GIS specialist working for a government conservation agency. She is tasked with identifying critical wetlands that need protection and monitoring their health. Nisha needs wetland data in a format compatible with her GIS software, enabling her to map and analyze wetland distribution. She has advanced GIS mapping skills and basic programming knowledge.
+
+## User Story 15
+Divya is a researcher focusing on desertification in Rajasthan. She requires land degradation data, vegetation health indices, and rainfall patterns to track and analyze desertification trends. Divya needs PyWRIS to facilitate data downloads and support integration with her desertification modeling software. She has advanced technical knowledge and uses Python extensively.
+
+## User Story 16
+Mendonca is a forestry officer tasked with monitoring illegal land conversions in protected forest areas in Madhya Pradesh. He needs land cover and land degradation data to detect unauthorized land use changes. Mendonca wants PyWRIS to provide high-frequency LULC updates for timely intervention. He has limited technical skills but has access to technical help that can provide him with processed data.
+
