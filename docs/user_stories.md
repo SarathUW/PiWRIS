@@ -22,3 +22,6 @@ Dev is a housing developer in South India. He wants to know where large bodies o
 
 ## User Story 7
 Avantika is a conservationist who specializes in sharing climate change information with the general public. She wants to be able to see water trends in different regions of India and use that information to guide presentations and blog posts she shares with the public. Avantika wants to use PyWRIS to track changes in water level across states and follow patterns in rainfall over time. Avantika is very technically skilled but appreciates clear and throrough documentation.
+
+## User Story 8
+John is an archivist at the National Digital Library of India. He wants to set up an automated process where water resources data from many sources are fetched daily and stored. John requires a easy to use tool to access India WRIS data that is easy to convert to a daily cronjob. The tool must also be capable of doing some basic data conversions. John has a moderate level of technical literacy and is capable of setting up simple automations and scripts. 
