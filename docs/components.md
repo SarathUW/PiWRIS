@@ -1,4 +1,4 @@
-### PyWRIS Components
+### PyWRIS Use Cases and Components
 
 #### 1. **Authentication**
    - **Functionality:** Manages authentication if India WRIS requires credentials, handling token generation, saving, and renewal.
@@ -17,13 +17,14 @@
 #### 3. WRIS India Database  
    - **What it does**: Provides water related information such as water elevation, discharge for lakes, rivers and reservoirs.  
    - **Inputs**: ID of the reservoir, lake or river, time of interest, variable of interest.  
-   - **Outputs**: Gives a timeseries data for the desired parameters  
-
+   - **Outputs**: Gives a timeseries data for the desired parameters
+   - **Usage:** Information from this database is automatically retrieved for use in the software
 
 #### 4. Search component  
   - **What it does**: Search within the database with desired parameters  
   - **Inputs**: Time filter component and space filter component, interested variable or dataset (optional)  
-  - **Ouptuts**: Outputs number of data points with respect to the requested parameters.  
+  - **Ouptuts**: Outputs number of data points with respect to the requested parameters.
+  - **Usage:** User can specify names, dates, regions, and other parameters to limit the scope of the data 
 
 
 
