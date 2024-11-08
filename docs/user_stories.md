@@ -50,3 +50,8 @@ Divya is a researcher focusing on desertification in Rajasthan. She requires lan
 ## User Story 16
 Mendonca is a forestry officer tasked with monitoring illegal land conversions in protected forest areas in Madhya Pradesh. He needs land cover and land degradation data to detect unauthorized land use changes. Mendonca wants PyWRIS to provide high-frequency LULC updates for timely intervention. He has limited technical skills but has access to technical help that can provide him with processed data.
 
+## User Story 17
+Kamal is the founder of a non-profit organization that focuses on providing access to clean water to rural communities in India. They want to know what bodies of water are close to target populations that they can then purify and transport to the communities. They need a way to view the exact locations of various bodies of water, and would ideally like visualize both their locations and the locations of rural communities they are serving. They have little technical experience and appreciate a software that is easy to use.
+
+## User Story 18
+Raj is the CEO of a small scuba diving company based in Bihar. He wants to epand his business further and aims to build a satellite location in West Bengal. To do this, he needs a way to view the different bodies of water in West Bengal as well as how the water level and compostion changes over the course of the year. He is not very technically skilled, but he has a dedicated team of employees who are.
