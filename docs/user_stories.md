@@ -50,10 +50,16 @@ Mendonca is a forestry officer tasked with monitoring illegal land conversions i
 Kamal is the founder of a non-profit organization that focuses on providing access to clean water to rural communities in India. They want to know what bodies of water are close to target populations that they can then purify and transport to the communities. They need a way to view the exact locations of various bodies of water, and would ideally like visualize both their locations and the locations of rural communities they are serving. They have little technical experience and appreciate a software that is easy to use.
 
 ## User Story 18
-Raj is the CEO of a small scuba diving company based in Bihar. He wants to expand his business further and aims to build a satellite location in West Bengal. To do this, he needs a way to view the different bodies of water in West Bengal as well as how the water level and composition changes over the course of the year. He is not very technically skilled, but he has a dedicated team of employees who are.
+Raj is the CEO of a small scuba diving company based in Bihar. He wants to expand his business further and aims to build a satellite location in West Bengal. To do this, he needs a way to view the different bodies of water in West Bengal as well as how the water level and composition change over the course of the year. He is not very technically skilled, but he has a dedicated team of employees who are.
 
 ## User Story 19
 Salman is a 9-year-old child who recently learned about the water cycle in his class. This sparked an interest in how the amount of water in lakes might change during the monsoon season, so his dad found this software and plans on looking through the data with Salman. Salman needs an easily understandable way to see how the water level changes at different points in the year. Salman has no technical experience since he is a young child, and his father has very limited technical know-how.
 
 ## User Story 20
 Gabbar is a poacher who trespasses and fishes for sea creatures without a permit. He knows that larger bodies of water like lakes are often teeming with wildife, so he wants to see where the lakes closest to him are. He needs a list of lakes and their locations, ideally one that he can print out or write down and not keep a digital copy of. Gabbar has limited technical skills but has gained some in recent years as he has turned more and more to digital resources.
+
+## User Story 21
+Usha is an artist who likes to paint nature scenes. She has recently been inspired to paint some rivers and wants to find a nearby river with beautiful surrounding landscapes. She needs a way to get a list of nearby rivers that she can then manually view in Google Street View. Usha is very technically skilled, as she used to be a data anlyst before switching career paths.
+
+## User Story 22
+Dave is a professor at UW who teaches a graduate-level course on software design. As part of this class, his students had to create a software, and he wants to evaluate the functionality and usability of this software. He wants to follow the documentation provided by the students to view the various features of the software and also just wants to poke around and see what it can do for fun. Dave is highly skilled and has no problem navigating technical difficulties, but he always appreciates good documentation that makes his job easier.
