@@ -25,7 +25,7 @@
 
 ---
 
-## **Modin**
+## [**Modin**](https://modin.readthedocs.io/en/stable/)
 
 - **GitHub Metrics**: ⭐ 10k stars, 134 contributors
   - Smaller community but dedicated to scaling pandas-like operations.
@@ -48,7 +48,7 @@
 
 ---
 
-## **Polars**
+## [**Polars**](https://pola.rs)
 
 - **GitHub Metrics**: ⭐ 30k stars, 500+ contributors
   - Rapidly growing, gaining popularity for speed and efficiency.
@@ -59,7 +59,7 @@
 
 - **Data Compatibility & Supplement Libraries**:
   - Arrow-compatible (pyArrow), making it highly interoperable with other tools.
-  - *GeoPolars* for geographic data processing with high performance.
+  - [*GeoPolars*](https://geopolars.org/latest/) for geographic data processing with high performance.
 
 - **Performance & Efficiency**:
   - Rust backend and lazy evaluation make it 10x faster than pandas on large data.
@@ -84,3 +84,6 @@
 - **Pandas**: Ideal for general, smaller datasets.
 - **Polars**: Fastest for large-scale data processing.
 - **Modin**: Best choice for scaling up pandas with parallel processing.
+
+For PyWris, Polars can be best to efficiently do extrapolation for in-memory timeseries data. 
+For vector data, Modin or geopandas will be a better choice.
