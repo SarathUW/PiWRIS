@@ -22,30 +22,6 @@
   - Large community, comprehensive documentation, and tutorials.
   
 - **Best For**: General-purpose data manipulation, small-to-medium datasets.
-  
----
-
-## **Polars**
-
-- **GitHub Metrics**: ⭐ 30k stars, 500+ contributors
-  - Rapidly growing, gaining popularity for speed and efficiency.
-
-- **Functionality & Data Types**:
-  - Provides DataFrame-like structures with a SQL-like query syntax.
-  - Built in Rust, highly efficient for columnar data and large-scale datasets.
-
-- **Data Compatibility & Supplement Libraries**:
-  - Arrow-compatible (pyArrow), making it highly interoperable with other tools.
-  - *GeoPolars* for geographic data processing with high performance.
-
-- **Performance & Efficiency**:
-  - Rust backend and lazy evaluation make it 10x faster than pandas on large data.
-  - Optimized for high-speed, large-scale data processing.
-
-- **Community & Documentation**:
-  - Growing community with improving documentation.
-  
-- **Best For**: Large datasets, high-speed operations, optimized workflows.
 
 ---
 
@@ -69,6 +45,30 @@
   - Smaller community, but pandas documentation can be applied directly due to API similarity.
 
 - **Best For**: Scaling pandas workflows, handling larger datasets with parallel processing.
+
+---
+
+## **Polars**
+
+- **GitHub Metrics**: ⭐ 30k stars, 500+ contributors
+  - Rapidly growing, gaining popularity for speed and efficiency.
+
+- **Functionality & Data Types**:
+  - Provides DataFrame-like structures with a SQL-like query syntax.
+  - Built in Rust, highly efficient for columnar data and large-scale datasets.
+
+- **Data Compatibility & Supplement Libraries**:
+  - Arrow-compatible (pyArrow), making it highly interoperable with other tools.
+  - *GeoPolars* for geographic data processing with high performance.
+
+- **Performance & Efficiency**:
+  - Rust backend and lazy evaluation make it 10x faster than pandas on large data.
+  - Optimized for high-speed, large-scale data processing.
+
+- **Community & Documentation**:
+  - Growing community with improving documentation.
+  
+- **Best For**: Large datasets, high-speed operations, optimized workflows.
 
 ---
 
