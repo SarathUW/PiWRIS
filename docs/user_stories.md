@@ -63,3 +63,9 @@ Usha is an artist who likes to paint nature scenes. She has recently been inspir
 
 ## User Story 22
 Dave is a professor at UW who teaches a graduate-level course on software design. As part of this class, his students had to create a software, and he wants to evaluate the functionality and usability of this software. He wants to follow the documentation provided by the students to view the various features of the software and also just wants to poke around and see what it can do for fun. Dave is highly skilled and has no problem navigating technical difficulties, but he always appreciates good documentation that makes his job easier.
+
+## user Story 23
+Elon is an AI enthusiast and CEO of several startups. He is exploring the potential of water-focused AI solutions for agriculture in South Asia. He wants to use PyWRIS to gather detailed data on seasonal water availability, especially focusing on the Ganges and Yamuna river basins. His goal is to assess the feasibility of implementing advanced AI-based irrigation systems and low-cost water desalination in regions with recurring water shortages. Elon has a highly skilled team, and they require well-structured API access with advanced filtering capabilities for regional data.
+
+## User Story 24
+Trump is a Prime Minister of a major global economy. He wants to monitor India’s water management and resource data to better understand potential water-related stress points that could impact regional stability and trade in the Indo-Pacific. He instructs his technical team to use PyWRIS for generating periodic reports and developing a dashboard to track real-time reservoir levels, river discharge, and drought indicators, aiding in strategic planning and diplomatic discussions.
