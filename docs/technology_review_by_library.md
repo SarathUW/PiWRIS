@@ -2,7 +2,7 @@
 
 ---
 
-## **Pandas**
+## [**Pandas**](https://pandas.pydata.org)
 
 - **GitHub Metrics**: ⭐ 43k+ stars, 3,000+ contributors
   - Extensive community, fast pull requests.
@@ -12,7 +12,7 @@
   - Supports a broad range of operations: merging, reshaping, time-series, and categorical data.
 
 - **Data Compatibility & Supplement Libraries**:
-  - Vast ecosystem: *GeoPandas* for vector spatial data, *Dask* for parallel processing, and many others.
+  - Vast ecosystem: [*GeoPandas*](https://geopandas.org/en/stable/) for vector spatial data, *Dask* for parallel processing, and many others.
 
 - **Performance & Efficiency**:
   - Ideal for small-to-medium datasets.
