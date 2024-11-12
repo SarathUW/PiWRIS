@@ -1,4 +1,5 @@
-# Library Comparison: Pandas, Polars, and Modin
+# Technology Review : PyWris
+## Library comparison for Data Exploration : Pandas, Polars, and Modin
 
 ---
 
