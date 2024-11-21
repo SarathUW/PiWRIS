@@ -1,6 +1,5 @@
 # import packages
-import pandas as pd
-import geopandas as gpd
+from SurfaceWater.Storage.Reservoir import reservoir
 
 # classes
 
