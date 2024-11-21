@@ -1,5 +1,5 @@
 # import packages
-from SurfaceWater.Storage.Reservoir import reservoir
+from surface_water.storage.reservoir import reservoir
 
 # classes
 

@@ -1,0 +1,18 @@
+[build-system]
+
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pywris"
+version = "2024.0"
+
+[project.optional-dependencies]
+
+[project.urls]
+
+[project.script]
+
+[project.gui-scripts]
+
+[project.entry-points]
