@@ -25,7 +25,7 @@ Follow these steps to install **PyWRIS** and get started:
 Clone this GitHub repository to get the latest codebase:
 
 ```bash
-git clone https://github.com/username/PyWRIS.git
+git clone https://github.com/SarathUW/PyWRIS.git
 cd PyWRIS
 ```
 
