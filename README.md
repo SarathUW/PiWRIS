@@ -1,5 +1,5 @@
 <img src="./docs/logos/PyWRIS_logo.png" alt="logo" width="300" height="auto">
-
+<p><b style="color:red;">WORK IN PROGRESS</b></p>
 **_A Python package for accessing India Water Resource and Information System (IndiaWRIS) data_**
 
 [India WRIS](https://indiawris.gov.in/wris/#/) is a rich collection of nation-wide water resource data provided by the Ministry of Water Resource, Government of India. It provides valuable information on various aspects of water resources, including data on river basins, dams, reservoirs, groundwater levels, water quality, and meteorological data. However, accessing this data can be challenging due to the platform's web-based, graphic-heavy front-end. Downloading bulk data for research purposes through this front-end framework is often time consuming and problematic due to slow load times.
