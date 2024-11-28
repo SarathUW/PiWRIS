@@ -1,0 +1,36 @@
+[project]
+name = "pywris"
+version = "0.0.1"
+dependencies = [
+  "requests",
+]
+requires-python = ">=3.10"
+authors = [
+  {name = "Sarath Suresh", email = "saraths96@gmail.com"},
+  {name = "Sanchit Minocha", email = "sanchitminochaiitr@gmail.com"},
+  {name = "Shahzaib Khan", email = "khan.shahzaib1007@gmail.com"},
+  {name = "Ishaan Ambrish", email = "ishaan.ambrish@gmail.com"},
+]
+maintainers = [
+]
+description = "Python Package for India WRIS Database"
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = ["WRIS", "Water Data", "Reservoir", "Hydrology", "India", "Ground Water","Monitoring", "Archive"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python"
+]
+
+[project.optional-dependencies]
+cli = [
+]
+
+[project.urls]
+Homepage = "https://example.com"
+Documentation = "https://readthedocs.org"
+Repository = "https://github.com/me/spam.git"
+"Bug Tracker" = "https://github.com/me/spam/issues"
+Changelog = "https://github.com/me/spam/blob/master/CHANGELOG.md"
+
+[tool.setuptools_scm]
