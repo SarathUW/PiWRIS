@@ -5,7 +5,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pywris"
-version = "2024.0"
+version = "0.0.1"
+keywords = ["water", "India", "WRIS"]
 
 [project.optional-dependencies]
 
