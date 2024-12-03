@@ -1,0 +1,5 @@
+name: pywris_env
+channels:
+  - default
+dependencies:
+  - python=3.11
