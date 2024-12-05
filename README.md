@@ -63,11 +63,14 @@ See the full text in [LICENSE](./LICENSE) for more details.
 Sarath:
 - wrote Python functions
 - code review
+
 Shahzaib:
 - code review
+
 Sanchit:
 - wrote Python functions
 - code review
+
 Ishaan:
 - wrote documentation
 - code review
