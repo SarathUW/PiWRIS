@@ -1,1 +1,5 @@
 site_name: PyWRIS
+nav:
+  - Home: home.md
+  - Commands: index.md
+  - Project Layout: dir.md
