@@ -1,7 +1,3 @@
-# Welcome to PyWRIS
-
-For full repository visit the [PyWRIS Github](https://github.com/SarathUW/PyWRIS/tree/main).
-
 ## Commands {wip}
 
 * `fetch_districts(state)` - Get a list of disctricts in a given state.
