@@ -18,7 +18,7 @@
             fetch_wris.py # get information from the India WRIS website
         pywris.py # {wip}
         pywris_main.py # {wip}
-    test
+    test/
         test_pywris.py # file for testing with pytest
     LICENSE # licensing information
     README.md # README file with information to get started
