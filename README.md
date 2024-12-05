@@ -63,14 +63,24 @@ See the full text in [LICENSE](./LICENSE) for more details.
 Sarath:
 - wrote Python functions
 - code review
+- set up directory
+- wrote user stories
 
 Shahzaib:
 - code review
+- set up directory
+- wrote user stories
+- added use cases/components
 
 Sanchit:
 - wrote Python functions
 - code review
+- set up directory
+- wrote user stories
+- added use cases/components
 
 Ishaan:
 - wrote documentation
 - code review
+- set up directory
+- wrote user stories
