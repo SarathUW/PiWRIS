@@ -1,4 +1,6 @@
-state_code = {
+from bidict import bidict
+
+state_id = bidict({
     "Andaman and Nicobar Islands": "AN",
     "Andhra Pradesh": "AP",
     "Arunachal Pradesh": "AR",
@@ -36,4 +38,4 @@ state_code = {
     "Uttar Pradesh": "UP",
     "Uttarakhand": "UT",
     "West Bengal": "WB",
-    }
+    })
