@@ -18,6 +18,9 @@ class State:
             return state_id[self.state_name]
         else:
             return None
+        
+    def fetch_districts(self):
+        self.districts = get_districts([self.state_name])
 
 class District(State):
     def __init__(
@@ -56,9 +59,12 @@ def get_districts(selected_states):
     payload = payload.format(state_ids_list_str)
     method = requests_config["geounits"]["get_districts"]["method"]
     # Send request and get response
-    json_response = get_response(url, payload, method)
+    json_response = get_response(url, payload, method, "get_districts")
     # Parse response
-    districts_data = pd.json_normalize(json_response["features"])
+    if json_response:
+        districts_data = pd.json_normalize(json_response["features"])
+    else:
+        return None
     
     # Prepare dictionary of district objects to return with their names as keys
     districts = {}

@@ -97,20 +97,26 @@ def get_reservoirs(
     # Fetch reservoir time series data
     reservoir_names_str = ",".join(["'" + reservoir + "'" for reservoir in selected_reservoirs])
     reservoir_data = get_reservoir_data(reservoir_names_str, timestep, start_date, end_date)
-    reservoir_df = pd.json_normalize(reservoir_data)
+    if reservoir_data:
+        reservoir_df = pd.json_normalize(reservoir_data)
+    else:
+        return None
+    # return reservoir_df
     # Create dictionary of reservoir objects 
     reservoirs = {}
     for res_name in selected_reservoirs:
-        sel_res_df = reservoir_df[reservoir_df['Reservoir Name']==res_name]
-        sel_res_state = sel_res_df['Parent']
-        
-        sel_res = Reservoir(res_name, sel_res_state)
-        sel_res.district = district_dict[sel_res_df['Child']]
-        sel_res.frl = sel_res_df['FRL'].unique()[-1]
-        sel_res.live_cap_frl = sel_res_df['Live Cap FRL'].unique()[-1]
-        sel_res.agency = sel_res_df['Agency Name'].unique()[-1]
-        sel_res.data = sel_res_df[['Date','Level','Current Live Storage']]
-        sel_res.data['Date'] = pd.to_datetime(sel_res.data['Date'])
+        if res_name in reservoir_df['Reservoir Name'].unique():
+            sel_res_df = reservoir_df[reservoir_df['Reservoir Name']==res_name]
+            sel_res_state = sel_res_df['Parent'].unique()[-1]
+            sel_res = Reservoir(res_name, sel_res_state)
+            sel_res.district = district_dict[sel_res_df['Child'].unique()[-1]]
+            sel_res.frl = sel_res_df['FRL'].unique()[-1]
+            sel_res.live_cap_frl = sel_res_df['Live Cap FRL'].unique()[-1]
+            sel_res.agency = sel_res_df['Agency Name'].unique()[-1]
+            sel_res.data = sel_res_df[['Date','Level','Current Live Storage']]
+            sel_res.data['Date'] = pd.to_datetime(sel_res.data['Date'])
+        else:
+            sel_res = Reservoir(res_name, None)
         
         reservoirs[res_name] = sel_res
     
@@ -124,14 +130,14 @@ def get_reservoir_names(states_list_str,district_names_list_str):
      states_list_str, district_names_list_str
     )
     method = requests_config["reservoir"]["get_reservoir_names"]["method"]
-    reservoir_names = get_response(url, payload, method)
+    reservoir_names = get_response(url, payload, method, "get_reservoir_names")
     return reservoir_names
 
 def get_reservoir_data_valid_date_range():
     url = requests_config["reservoir"]["get_reservoir_data_valid_date_range"]["url"]
     payload = requests_config["reservoir"]["get_reservoir_data_valid_date_range"]["payload"]
     method = requests_config["reservoir"]["get_reservoir_data_valid_date_range"]["method"]
-    reservoir_data_valid_date_range = get_response(url, payload, method)
+    reservoir_data_valid_date_range = get_response(url, payload, method, "get_reservoir_data_valid_date_range")
     return reservoir_data_valid_date_range[0]
 
 def get_reservoir_data(reservoir_names_str, timestep, start_date, end_date):
@@ -142,7 +148,7 @@ def get_reservoir_data(reservoir_names_str, timestep, start_date, end_date):
     payload["stnVal"]["Startdate"] = payload["stnVal"]["Startdate"].format(start_date)
     payload["stnVal"]["Enddate"] = payload["stnVal"]["Enddate"].format(end_date)
     method = requests_config["reservoir"]["get_reservoir_data"]["method"]
-    reservoir_data = get_response(url, payload, method)
+    reservoir_data = get_response(url, payload, method, "get_reservoir_data")
     return reservoir_data
 
 def check_valid_date_range(start_date, end_date, valid_date_range):

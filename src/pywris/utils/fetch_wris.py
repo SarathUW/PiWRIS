@@ -1,7 +1,7 @@
 import requests
 import json
 
-def get_response(url,payload, method):
+def get_response(url,payload, method, request_desciption=None):
 
     if method == 'GET':
         url_complete = url + payload
@@ -16,7 +16,11 @@ def get_response(url,payload, method):
             json_response = response.json()
             return json_response
         except json.JSONDecodeError:
-            print('Empty Response from the server.')
+            if request_desciption is not None:
+                print(f'Empty Response from the server for request: {request_desciption}.')
+            else:
+                print('Empty Response from the server.')
+            return None
     else:
         print("Error:", response.status_code)
         raise Exception("Error:", response.status_code)
