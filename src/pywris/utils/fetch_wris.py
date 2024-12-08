@@ -16,7 +16,7 @@ def get_response(url,payload, method):
             json_response = response.json()
             return json_response
         except json.JSONDecodeError:
-            raise ValueError('Empty Response from the server.')
+            print('Empty Response from the server.')
     else:
         print("Error:", response.status_code)
         raise Exception("Error:", response.status_code)
