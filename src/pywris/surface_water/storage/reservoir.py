@@ -11,12 +11,20 @@ import pywris.geo_units.components as geo_components
 class Reservoir:
     def __init__(self, reservoir_name, state, district=None):
         self.reservoir_name = reservoir_name
+        self.dam_code = None
+        self.latitude = None
+        self.longitude = None
         self.state = geo_components.State(state)
         self.district = geo_components.District(state)
+        self.block_name = None
+        self.basin = None
+        self.sub_basin_name = None
+        self.agency = None
         self.frl = None
         self.live_cap_frl = None
-        self.agency = None
         self.data = None
+        
+
 
     def fetch_data(self):
         pass
@@ -89,34 +97,58 @@ def get_reservoirs(
                 pass
     else:
         raise ValueError("Reservoirs must be a list of strings or 'all'.")
+    
+    # Fetch reservoir attributes (primarily latitute and longitude)
+    reservoir_names_str = ",".join(["'" + reservoir + "'" for reservoir in selected_reservoirs])
+    reservoir_info = get_reservoir_info(reservoir_names_str)
+    if reservoir_info:
+        if 'features' in reservoir_info.keys():
+            reservoir_info_df = pd.json_normalize(reservoir_info['features'])
+        else:
+            reservoir_info_df = None
+    else:
+        reservoir_info_df = None
 
     # Fetch reservoir valid dates and check if user provided valid dates
     reservoir_data_valid_date_range = get_reservoir_data_valid_date_range()
     check_valid_date_range(start_date, end_date, reservoir_data_valid_date_range)
     
     # Fetch reservoir time series data
-    reservoir_names_str = ",".join(["'" + reservoir + "'" for reservoir in selected_reservoirs])
     reservoir_data = get_reservoir_data(reservoir_names_str, timestep, start_date, end_date)
     if reservoir_data:
-        reservoir_df = pd.json_normalize(reservoir_data)
+        reservoir_data_df = pd.json_normalize(reservoir_data)
     else:
         return None
-    # return reservoir_df
+    # return reservoir_data_df
     # Create dictionary of reservoir objects 
     reservoirs = {}
     for res_name in selected_reservoirs:
-        if res_name in reservoir_df['Reservoir Name'].unique():
-            sel_res_df = reservoir_df[reservoir_df['Reservoir Name']==res_name]
-            sel_res_state = sel_res_df['Parent'].unique()[-1]
+        if res_name in reservoir_info_df['attributes.station_name'].unique():
+            sel_res_info_df = reservoir_info_df[reservoir_info_df['attributes.station_name']==res_name]
+            sel_res_state = sel_res_info_df['attributes.state_name'].unique()[-1]
             sel_res = Reservoir(res_name, sel_res_state)
-            sel_res.district = district_dict[sel_res_df['Child'].unique()[-1]]
-            sel_res.frl = sel_res_df['FRL'].unique()[-1]
-            sel_res.live_cap_frl = sel_res_df['Live Cap FRL'].unique()[-1]
-            sel_res.agency = sel_res_df['Agency Name'].unique()[-1]
-            sel_res.data = sel_res_df[['Date','Level','Current Live Storage']]
-            sel_res.data['Date'] = pd.to_datetime(sel_res.data['Date'])
+            sel_res.latitude = sel_res_info_df['attributes.lat'].unique()[-1]
+            sel_res.longitude = sel_res_info_df['attributes.long'].unique()[-1]
+            sel_res.agency = sel_res_info_df['attributes.agency_name'].unique()[-1]
+            sel_res.dam_code = sel_res_info_df['attributes.dam_code'].unique()[-1]
+            sel_res.frl = sel_res_info_df['attributes.frl'].unique()[-1]
+            sel_res.live_cap_frl = sel_res_info_df['attributes.lsc_frl'].unique()[-1]
+            sel_res.block_name = sel_res_info_df['attributes.block_name'].unique()[-1]
+            basin_name = sel_res_info_df['attributes.basin_name'].unique()[-1]
+            basin_code = sel_res_info_df['attributes.basin_code'].unique()[-1]
+            sel_res.basin = geo_components.Basin(basin_name, basin_code)
+            sel_res.sub_basin_name = sel_res_info_df['attributes.sub_basin_name'].unique()[-1]
+            sel_res.sub_basin_name = sel_res_info_df['attributes.sub_basin_name'].unique()[-1] 
         else:
             sel_res = Reservoir(res_name, None)
+
+        if res_name in reservoir_data_df['Reservoir Name'].unique():
+            sel_res_data_df = reservoir_data_df[reservoir_data_df['Reservoir Name']==res_name]
+            sel_res.data = sel_res_data_df[['Date','Level','Current Live Storage']]
+            sel_res.data['Date'] = pd.to_datetime(sel_res.data['Date'])
+            sel_res.district = district_dict[sel_res_data_df['Child'].unique()[-1]]
+        else:
+            pass
         
         reservoirs[res_name] = sel_res
     
@@ -162,3 +194,13 @@ def check_valid_date_range(start_date, end_date, valid_date_range):
         )
     if start_date > end_date:
         raise ValueError("Invalid date range. Start date must be before end date.")
+    
+def get_reservoir_info(reservoir_name_str):
+    url = requests_config["reservoir"]["get_reservoir_info"]["url"]
+    payload = deepcopy(requests_config["reservoir"]["get_reservoir_info"]["payload"])
+    payload = payload.format(reservoir_name_str)
+    method = requests_config["reservoir"]["get_reservoir_info"]["method"]
+    # Send request and get response
+    json_response = get_response(url, payload, method, "get_reservoir_info")
+    return json_response
+
