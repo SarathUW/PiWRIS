@@ -33,6 +33,12 @@ class District(State):
         self.district_length = float(length) if length is not None else length
         self.reservoirs = []
     
+
+class Basin:
+    def __init__(self, basin_name, basin_code=None):
+        self.basin_name = basin_name
+        self.basin_code = basin_code
+
 def get_districts(selected_states):
     """
     Fetches list of districts given state names.
