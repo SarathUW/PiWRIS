@@ -2,7 +2,7 @@
 name = "pywris"
 version = "0.0.1"
 dependencies = [
-  "requests",
+  "requests", 
 ]
 requires-python = ">=3.10"
 authors = [

@@ -105,8 +105,7 @@ def get_reservoirs(
     for res_name in selected_reservoirs:
         print(res_name)
         sel_res_df = reservoir_df[reservoir_df['Reservoir Name']==res_name]
-        print(sel_res_df['Parent'])
-        sel_res_state = sel_res_df['Parent'].values()[0]
+        sel_res_state = sel_res_df['Parent']
         
         sel_res = Reservoir(res_name, sel_res_state)
         sel_res.district = district_dict[sel_res_df['Child']]
