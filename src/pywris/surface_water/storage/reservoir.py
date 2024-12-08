@@ -98,14 +98,10 @@ def get_reservoirs(
     reservoir_names_str = ",".join(["'" + reservoir + "'" for reservoir in selected_reservoirs])
     reservoir_data = get_reservoir_data(reservoir_names_str, timestep, start_date, end_date)
     reservoir_df = pd.json_normalize(reservoir_data)
-    print(reservoir_df)
     # Create dictionary of reservoir objects 
     reservoirs = {}
-    print(selected_reservoirs)
     for res_name in selected_reservoirs:
-        print(res_name)
         sel_res_df = reservoir_df[reservoir_df['Reservoir Name']==res_name]
-        print(sel_res_df['Parent'])
         sel_res_state = sel_res_df['Parent'].values()[0]
         
         sel_res = Reservoir(res_name, sel_res_state)
@@ -135,7 +131,6 @@ def get_reservoir_data_valid_date_range():
     url = requests_config["reservoir"]["get_reservoir_data_valid_date_range"]["url"]
     payload = requests_config["reservoir"]["get_reservoir_data_valid_date_range"]["payload"]
     method = requests_config["reservoir"]["get_reservoir_data_valid_date_range"]["method"]
-    print(url,payload)
     reservoir_data_valid_date_range = get_response(url, payload, method)
     return reservoir_data_valid_date_range[0]
 
@@ -147,7 +142,6 @@ def get_reservoir_data(reservoir_names_str, timestep, start_date, end_date):
     payload["stnVal"]["Startdate"] = payload["stnVal"]["Startdate"].format(start_date)
     payload["stnVal"]["Enddate"] = payload["stnVal"]["Enddate"].format(end_date)
     method = requests_config["reservoir"]["get_reservoir_data"]["method"]
-    print(url,payload)
     reservoir_data = get_response(url, payload, method)
     return reservoir_data
 
