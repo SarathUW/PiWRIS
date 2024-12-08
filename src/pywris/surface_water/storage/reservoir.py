@@ -98,12 +98,15 @@ def get_reservoirs(
     reservoir_names_str = ",".join(["'" + reservoir + "'" for reservoir in selected_reservoirs])
     reservoir_data = get_reservoir_data(reservoir_names_str, timestep, start_date, end_date)
     reservoir_df = pd.json_normalize(reservoir_data)
-    
+    print(reservoir_df)
     # Create dictionary of reservoir objects 
     reservoirs = {}
+    print(selected_reservoirs)
     for res_name in selected_reservoirs:
+        print(res_name)
         sel_res_df = reservoir_df[reservoir_df['Reservoir Name']==res_name]
-        sel_res_state = sel_res_df['Parent']
+        print(sel_res_df['Parent'])
+        sel_res_state = sel_res_df['Parent'].values()[0]
         
         sel_res = Reservoir(res_name, sel_res_state)
         sel_res.district = district_dict[sel_res_df['Child']]
