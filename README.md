@@ -31,7 +31,7 @@ git clone https://github.com/SarathUW/PyWRIS.git
 cd PyWRIS
 ```
 
-#### 2. Install using Conda
+#### 2. Install using Conda (todo)
 
 ```bash
 conda install pywris -c conda-forge
