@@ -68,6 +68,7 @@ Sarath:
 - set up .toml file
 
 Shahzaib:
+- wrote Python functions
 - code review
 - set up directory
 - wrote user stories
