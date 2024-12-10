@@ -13,13 +13,12 @@ def plot_data(input_object, **args):
     - **args: Additional arguments for customization (e.g., columns to plot, title, etc.)
     """
     from pywris.surface_water.storage.reservoir import Reservoir #created a temp fix for circular imports error 
-    # Check if input_object is an instance of the Reservoir class
     if isinstance(input_object, Reservoir):
         return plot_reservoir(input_object, **args)
     else:
         raise TypeError(f"Unsupported object type: {type(input_object)}. Only 'Reservoir' class is supported.")
     
-def plot_reservoir(self, columns=None, title=None): #Check on net how to add **args here.
+def plot_reservoir(self, columns=None, title=None):
         """
         Create an interactive Plotly time series plot for reservoir data.
 
@@ -46,8 +45,6 @@ def plot_reservoir(self, columns=None, title=None): #Check on net how to add **a
                 pass
 
         fig = make_subplots(specs=[[{"secondary_y": True}]]) 
-
-        # Add traces for each selected column
         for column in columns:
             fig.add_trace(
                 go.Scatter(
@@ -58,8 +55,6 @@ def plot_reservoir(self, columns=None, title=None): #Check on net how to add **a
                 ),
                 secondary_y=False
             )
-        
-        # Customize layout
         fig.update_layout(
             title=title or f"Time Series Data for Reservoir: {self.reservoir_name}",
             xaxis_title="Date",
@@ -70,6 +65,4 @@ def plot_reservoir(self, columns=None, title=None): #Check on net how to add **a
         )
         fig.update_xaxes(showgrid=True)
         fig.update_yaxes(showgrid=True)
-
-        # Display the plot
         fig.show()
