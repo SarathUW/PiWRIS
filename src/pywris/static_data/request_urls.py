@@ -19,6 +19,7 @@ requests_config = {
         'get_reservoir_info':{
             'url':'https://arc.indiawris.gov.in/server/rest/services/NWIC/Reservoir_Points/MapServer/0/query?',
             'payload':'f=json&outFields=*&returnGeometry=false&spatialRel=esriSpatialRelIntersects&where=station_type=%27Reservoir%27%20AND%20station_name%20IN%20({})',
+            'payload_all_reservoirs':'f=json&outFields=*&returnGeometry=false&spatialRel=esriSpatialRelIntersects&where=station_type=%27Reservoir%27',
             'method': 'GET'
         }
     },
