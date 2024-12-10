@@ -1,4 +1,5 @@
 site_name: PyWRIS
+site_url: https://sarathuw.github.io/PyWRIS/
 theme:
   name: "readthedocs"
 nav:
