@@ -1,6 +1,8 @@
 from copy import deepcopy
 
 import pandas as pd
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 from pywris.utils.fetch_wris import get_response
 from pywris.static_data.state_ids import state_id
@@ -28,9 +30,61 @@ class Reservoir:
 
     def fetch_data(self):
         pass
-    
-    def plot():
-        pass
+
+    def plot(self, columns=None, title=None):
+        """
+        Create an interactive Plotly time series plot for reservoir data.
+
+        Parameters:
+        - columns (list): List of columns to plot (Currently ['Level', 'Current Live Storage']).
+                          If None, it will plot all numeric columns except 'Date'.
+        - title (str): Custom title for the plot, if provied.
+        """
+        if self.data is None or self.data.empty:
+            raise ValueError(f"No data available for reservoir {self.reservoir_name} to plot.")
+        
+        if not pd.api.types.is_datetime64_any_dtype(self.data['Date']):
+            self.data['Date'] = pd.to_datetime(self.data['Date'])
+        else:
+            pass
+        
+        if columns is None:
+            columns = [col for col in self.data.columns if col != 'Date' and pd.api.types.is_numeric_dtype(self.data[col])]
+        else:
+            missing_cols = [col for col in columns if col not in self.data.columns]
+            if missing_cols:
+                raise KeyError(f"The following columns are missing from data: {missing_cols}")
+            else:
+                pass
+
+        fig = make_subplots(specs=[[{"secondary_y": True}]]) 
+
+        # Add traces for each selected column
+        for column in columns:
+            fig.add_trace(
+                go.Scatter(
+                    x=self.data['Date'],
+                    y=self.data[column],
+                    mode='lines+markers',
+                    name=column
+                ),
+                secondary_y=False
+            )
+        
+        # Customize layout
+        fig.update_layout(
+            title=title or f"Time Series Data for Reservoir: {self.reservoir_name}",
+            xaxis_title="Date",
+            yaxis_title="Values",
+            template="plotly_white",
+            legend=dict(title="Legend"),
+            hovermode="x unified",
+        )
+        fig.update_xaxes(showgrid=True)
+        fig.update_yaxes(showgrid=True)
+
+        # Display the plot
+        fig.show()
 
 
 def get_reservoirs(
