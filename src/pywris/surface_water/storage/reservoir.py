@@ -27,8 +27,6 @@ class Reservoir:
         self.live_cap_frl = None
         self.data = None
         
-
-
     def fetch_data(self):
         pass
 
@@ -55,10 +53,20 @@ def get_reservoirs(
     Fetches list of reservoirs given district name.
     Parameters:
     """
-
+    
+    # Check if timestep is valid
+    if timestep not in ["Daily", "Monthly", "Yearly"]:
+        raise ValueError("Timestep must be 'Daily', 'Monthly' or 'Yearly'.")
+    else:
+        pass
+    
+    # Initialize flag to indicate whether all states are selected
+    selection_all_states = False
+    
     # Check if selected_states has valid input
     if selected_states == "all":
         selected_states = list(state_id.keys())
+        selection_all_states = True
     elif isinstance(selected_states, list) and all(
         isinstance(state, str) for state in selected_states
     ):
@@ -109,7 +117,7 @@ def get_reservoirs(
     
     # Fetch reservoir attributes (primarily latitute and longitude)
     reservoir_names_str = ",".join(["'" + reservoir + "'" for reservoir in selected_reservoirs])
-    reservoir_info = get_reservoir_info(reservoir_names_str)
+    reservoir_info = get_reservoir_info(reservoir_names_str, selection_all_states)
     if reservoir_info:
         if 'features' in reservoir_info.keys():
             reservoir_info_df = pd.json_normalize(reservoir_info['features'])
@@ -160,8 +168,13 @@ def get_reservoirs(
             pass
         
         reservoirs[res_name] = sel_res
-    
-    return reservoirs
+        
+        # Return the comined dataframe as well
+        reservoir_data_df_drop_dl  = reservoir_data_df.drop_duplicates(subset=['Reservoir Name'],keep='last')
+        reservoir_combined_df = reservoir_info_df.merge(reservoir_data_df_drop_dl, how='left', left_on='attributes.station_name', right_on='Reservoir Name')
+        # Rename columns names to attribute names
+        
+    return reservoirs, reservoir_combined_df
 
 def get_reservoir_names(states_list_str,district_names_list_str):    
     url = requests_config["reservoir"]["get_reservoir_names"]["url"]
@@ -204,7 +217,20 @@ def check_valid_date_range(start_date, end_date, valid_date_range):
     if start_date > end_date:
         raise ValueError("Invalid date range. Start date must be before end date.")
     
-def get_reservoir_info(reservoir_name_str):
+def get_reservoir_info(reservoir_name_str, selection_all=False):
+    """
+    Fetches detailed information for the specified reservoirs.
+
+    Parameters:
+    ----------
+    reservoir_name_str : str
+        Comma-separated reservoir names, formatted with single quotes (e.g., "'Reservoir1','Reservoir2'").
+
+    Returns:
+    -------
+    dict
+        JSON response containing detailed information about the reservoirs.
+    """
     url = requests_config["reservoir"]["get_reservoir_info"]["url"]
     payload = deepcopy(requests_config["reservoir"]["get_reservoir_info"]["payload"])
     payload = payload.format(reservoir_name_str)

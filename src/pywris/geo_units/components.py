@@ -2,6 +2,8 @@
 from copy import deepcopy
 
 import pandas as pd
+from IPython.display import display, HTML
+import json
 
 from pywris.utils.fetch_wris import get_response
 from pywris.static_data.state_ids import state_id
@@ -100,6 +102,6 @@ def check_valid_states(selected_states):
     if isinstance(selected_states, list):
         for state in selected_states:
             if state not in valid_states:
-                raise ValueError(f"{state} is not a valid state.")
+                raise ValueError(f"{state} is not a valid state. List of valid states: {valid_states}.")
     else:
         raise ValueError("States must be a list.")
