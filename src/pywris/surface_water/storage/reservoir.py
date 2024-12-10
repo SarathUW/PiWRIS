@@ -7,6 +7,7 @@ from plotly.subplots import make_subplots
 from pywris.utils.fetch_wris import get_response
 from pywris.static_data.state_ids import state_id
 from pywris.static_data.request_urls import requests_config
+from pywris.visualization.plot import plot_data
 import pywris.geo_units.components as geo_components
 
 
@@ -31,60 +32,14 @@ class Reservoir:
     def fetch_data(self):
         pass
 
-    def plot(self, columns=None, title=None):
+    def plot(self, **args):
         """
-        Create an interactive Plotly time series plot for reservoir data.
-
+        Plots timeseries of the reservoir data
+        
         Parameters:
-        - columns (list): List of columns to plot (Currently ['Level', 'Current Live Storage']).
-                          If None, it will plot all numeric columns except 'Date'.
-        - title (str): Custom title for the plot, if provied.
+        - **args: Arguments that will be passed to the general plot function
         """
-        if self.data is None or self.data.empty:
-            raise ValueError(f"No data available for reservoir {self.reservoir_name} to plot.")
-        
-        if not pd.api.types.is_datetime64_any_dtype(self.data['Date']):
-            self.data['Date'] = pd.to_datetime(self.data['Date'])
-        else:
-            pass
-        
-        if columns is None:
-            columns = [col for col in self.data.columns if col != 'Date' and pd.api.types.is_numeric_dtype(self.data[col])]
-        else:
-            missing_cols = [col for col in columns if col not in self.data.columns]
-            if missing_cols:
-                raise KeyError(f"The following columns are missing from data: {missing_cols}")
-            else:
-                pass
-
-        fig = make_subplots(specs=[[{"secondary_y": True}]]) 
-
-        # Add traces for each selected column
-        for column in columns:
-            fig.add_trace(
-                go.Scatter(
-                    x=self.data['Date'],
-                    y=self.data[column],
-                    mode='lines+markers',
-                    name=column
-                ),
-                secondary_y=False
-            )
-        
-        # Customize layout
-        fig.update_layout(
-            title=title or f"Time Series Data for Reservoir: {self.reservoir_name}",
-            xaxis_title="Date",
-            yaxis_title="Values",
-            template="plotly_white",
-            legend=dict(title="Legend"),
-            hovermode="x unified",
-        )
-        fig.update_xaxes(showgrid=True)
-        fig.update_yaxes(showgrid=True)
-
-        # Display the plot
-        fig.show()
+        plot_data(self, **args)
 
 
 def get_reservoirs(
@@ -97,64 +52,9 @@ def get_reservoirs(
     selected_reservoirs="all",
 ):
     """
-    Fetches a list of reservoir objects based on specified filters and returns detailed information including time series data.
-
+    Fetches list of reservoirs given district name.
     Parameters:
-    ----------
-    end_date : str
-        The end date of the data to fetch, in the format 'YYYY-MM-DD'.
-    start_date : str, optional
-        The start date of the data to fetch, in the format 'YYYY-MM-DD' (default is '1991-01-01').
-    timestep : str, optional
-        The temporal resolution of the data (Acceptable values are 'Daily', 'Monthly' or 'Yearly'). Default is 'Daily'.
-    selected_states : list of str or "all", optional
-        List of state names to filter reservoirs. Use "all" to include reservoirs from all states. It is required when selected_basins is None.
-    selected_districts : list of str or "all", optional
-        List of district names to filter reservoirs. Use "all" to include reservoirs from all districts.
-    selected_basins : list of str or None, optional
-        List of basin names to filter reservoirs. It is required when selected_states is None.
-    selected_reservoirs : list of str or "all", optional
-        List of reservoir names to fetch. Use "all" to include all reservoirs within the filtered states and districts.
-
-    Returns:
-    -------
-    dict
-        A dictionary of reservoir objects keyed by reservoir names. Each reservoir object contains metadata (e.g., location, state, basin)
-        and time series data (e.g., water level, live storage) for the specified date range and timestep.
-
-    Raises:
-    ------
-    ValueError
-        - If `selected_states` is not a list of strings or "all".
-        - If `selected_districts` is not a list of strings or "all".
-        - If `selected_reservoirs` is not a list of strings or "all".
-        - If any of the provided states, districts, or reservoirs are invalid.
-
-    Notes:
-    ------
-    - If "all" is used for `selected_states` or `selected_districts`, it fetches all corresponding entries.
-
-    Example:
-    --------
-    Fetch reservoirs in a specific state and district:
-    >>> reservoirs = get_reservoirs(
-            end_date='2024-12-01',
-            selected_states=['Kerala'],
-            selected_districts=['Wayanad'],
-            timestep='Daily'
-        )
-
-    Access metadata and time series for a specific reservoir:
-    >>> res = reservoirs['Krishna Reservoir']
-    >>> print(res.latitude, res.longitude)
-    >>> print(res.data.head())
     """
-    
-    # Check if timestep is valid
-    if timestep not in ["Daily", "Monthly", "Yearly"]:
-        raise ValueError("Timestep must be 'Daily', 'Monthly' or 'Yearly'.")
-    else:
-        pass
 
     # Check if selected_states has valid input
     if selected_states == "all":
@@ -263,22 +163,7 @@ def get_reservoirs(
     
     return reservoirs
 
-def get_reservoir_names(states_list_str,district_names_list_str):
-    """
-    Fetches reservoir names based on the provided states and districts.
-
-    Parameters:
-    ----------
-    states_list_str : str
-        Comma-separated state names, formatted with single quotes (e.g., "'Karnataka','Maharashtra'").
-    district_names_list_str : str
-        Comma-separated district names, formatted with single quotes (e.g., "'Bangalore Rural','Pune'").
-
-    Returns:
-    -------
-    list
-        A nested list of reservoir names corresponding to the specified states and districts.
-    """    
+def get_reservoir_names(states_list_str,district_names_list_str):    
     url = requests_config["reservoir"]["get_reservoir_names"]["url"]
     # Create a copy of the payload to avoid modifying the original
     payload = deepcopy(requests_config["reservoir"]["get_reservoir_names"]["payload"])
@@ -290,14 +175,6 @@ def get_reservoir_names(states_list_str,district_names_list_str):
     return reservoir_names
 
 def get_reservoir_data_valid_date_range():
-    """
-    Fetches the valid date range for reservoir data availability.
-
-    Returns:
-    -------
-    list
-        A list containing the start and end date strings of valid data availability.
-    """    
     url = requests_config["reservoir"]["get_reservoir_data_valid_date_range"]["url"]
     payload = requests_config["reservoir"]["get_reservoir_data_valid_date_range"]["payload"]
     method = requests_config["reservoir"]["get_reservoir_data_valid_date_range"]["method"]
@@ -305,25 +182,6 @@ def get_reservoir_data_valid_date_range():
     return reservoir_data_valid_date_range[0]
 
 def get_reservoir_data(reservoir_names_str, timestep, start_date, end_date):
-    """
-    Fetches time-series data for specified reservoirs within a given date range.
-
-    Parameters:
-    ----------
-    reservoir_names_str : str
-        Comma-separated reservoir names, formatted with single quotes (e.g., "'Reservoir1','Reservoir2'").
-    timestep : str
-        The desired time interval for the data. Acceptable values are 'Daily', 'Monthly', or 'Yearly'.
-    start_date : str
-        The start date for the data range in 'YYYY-MM-DD' format.
-    end_date : str
-        The end date for the data range in 'YYYY-MM-DD' format.
-
-    Returns:
-    -------
-    list of dict
-        A list where each element is a dictionary containing time-series data for a reservoir.
-    """
     url = requests_config["reservoir"]["get_reservoir_data"]["url"]
     payload = deepcopy(requests_config["reservoir"]["get_reservoir_data"]["payload"])
     payload["stnVal"]["Reservoir"] = payload["stnVal"]["Reservoir"].format(reservoir_names_str)
@@ -335,27 +193,6 @@ def get_reservoir_data(reservoir_names_str, timestep, start_date, end_date):
     return reservoir_data
 
 def check_valid_date_range(start_date, end_date, valid_date_range):
-    """
-    Validates the user-provided date range against the allowed date range.
-
-    Parameters:
-    ----------
-    start_date : str or pd.Timestamp
-        The start date for the data range in 'YYYY-MM-DD' format or as a Timestamp.
-    end_date : str or pd.Timestamp
-        The end date for the data range in 'YYYY-MM-DD' format or as a Timestamp.
-    valid_date_range : list or tuple
-        A list or tuple containing two elements: the valid start and end dates as strings or Timestamps.
-
-    Raises:
-    ------
-    ValueError
-        If the start or end date is outside the valid date range or if the start date is after the end date.
-
-    Notes:
-    ------
-    - Converts all inputs to `pd.Timestamp` for comparison.
-    """
     start_date = pd.to_datetime(start_date)
     end_date = pd.to_datetime(end_date)
     valid_start_date = pd.to_datetime(valid_date_range[0])
@@ -368,19 +205,6 @@ def check_valid_date_range(start_date, end_date, valid_date_range):
         raise ValueError("Invalid date range. Start date must be before end date.")
     
 def get_reservoir_info(reservoir_name_str):
-    """
-    Fetches detailed information for the specified reservoirs.
-
-    Parameters:
-    ----------
-    reservoir_name_str : str
-        Comma-separated reservoir names, formatted with single quotes (e.g., "'Reservoir1','Reservoir2'").
-
-    Returns:
-    -------
-    dict
-        JSON response containing detailed information about the reservoirs.
-    """
     url = requests_config["reservoir"]["get_reservoir_info"]["url"]
     payload = deepcopy(requests_config["reservoir"]["get_reservoir_info"]["payload"])
     payload = payload.format(reservoir_name_str)
