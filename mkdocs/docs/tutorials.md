@@ -1,4 +1,6 @@
-## Tutorials
+# Tutorials
+
+## Checking validity
 
 ### Check if states are valid
 
@@ -7,6 +9,8 @@ check_states = check_valid_states(
     selected_states = "'Kerala', 'Bihar'"
 )
 ```
+
+## Fetching data
 
 ### Get a list of districts in a specific state
 
@@ -45,4 +49,20 @@ res_names = get_reservoir_names(
 )
 ```
 
-### Plot timeseries data {wip}
+## Plotting
+
+### General plot {wip}
+
+```
+plot_object = plot_data(
+    input_object = ''
+)
+```
+
+### Interactive timeseries plot without specifying columns
+
+```
+plot_timeseries - plot_reservoir(
+    title = "An interactive timeseries plot"
+)
+```

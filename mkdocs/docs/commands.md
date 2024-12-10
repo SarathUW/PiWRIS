@@ -1,10 +1,17 @@
 ## Commands
 
+This page lists all avilable functions. For example usage, please see the [Tutorials](tutorials.md) page.
+
+### Checking Validity
+
 * `check_valid_states(selected_states)` - Check if all listed states are valid
 * `check_valid_date_range(start_date, end_date, valid_date_range)` - Check if given date range is valid
     - start_date: start date of the data to fetch, formatted as YYYY-MM-DD or as a timestamp
     - end_date: end date of the data to fetch, formatted as YYYY-MM-DD or as a timestamp
     - valid_date_range: a list or tuple containing two elements (valid start and end dates) as strings or timestamps
+
+### Fetching information
+
 * `get_districts(selected_states)` - Get a dictionary of districts in given states
 * `get_reservoirs(end_date, start_date, timestep, selected_states, selected_districts, selected_basins, selected_reservoirs)` - Get a list of reservoirs and their time series data based on the given arguments
     - end_date: end date of the data to fetch (YYYY-MM-DD)
@@ -19,4 +26,11 @@
 * `get_reservoir_names(states_list_str, districts_names_list_str)` - Get the names of reservoirs in specified states and districts
     - states_list_str: state names, separated by commas, formatted with single quotes
     - districts_names_list_str: district names, separated by commas, formatted with single quotes
-* `plot(self, args)` - Plot reservoir timeseries data
+
+### Plotting
+
+* `plot_data(input_object, **args)` - General plotting function
+    - input_object: the object to plot (an instance of Reservoir, Groundwater, etc.)
+* `plot_reservoir(self, columns, title)` - Create interactive timeseries plot for reservoir data
+    - columns: list of columns to plot. If none, it will default to all numeric columns except "Date"
+    - title: custom title for the plot
