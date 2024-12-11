@@ -186,8 +186,8 @@ class HydroFrame:
         return filtered_hf
 
 ## Things to DO:
-## 1. Add representation to individual classes of State, Reservoir and District.
-## 2. Adjust indentation and padding in HydroFrame representation
-## 3. Renaming of columns in reservoir_gdf
-## 4. Pytests
+## 1. Add representation to individual classes of State, Reservoir and District. (done)
+## 2. Adjust indentation and padding in HydroFrame representation (done)
+## 3. Renaming of columns in reservoir_gdf (done)
+## 4. Pytests 
 

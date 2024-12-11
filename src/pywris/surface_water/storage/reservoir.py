@@ -439,7 +439,10 @@ def get_reservoir_info(reservoir_name_str, selection_all=False):
         JSON response containing detailed information about the reservoirs.
     """
     url = requests_config["reservoir"]["get_reservoir_info"]["url"]
-    payload = deepcopy(requests_config["reservoir"]["get_reservoir_info"]["payload"])
+    if selection_all:
+        payload = deepcopy(requests_config["reservoir"]["get_reservoir_info"]["payload_all_reservoirs"])
+    else:
+        payload = deepcopy(requests_config["reservoir"]["get_reservoir_info"]["payload"])
     payload = payload.format(reservoir_name_str)
     method = requests_config["reservoir"]["get_reservoir_info"]["method"]
     # Send request and get response
