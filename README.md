@@ -60,32 +60,34 @@ See the full text in [LICENSE](./LICENSE) for more details.
 **Disclaimer**: The India WRIS data accessed by this package is provided and owned by the Ministry of Water Resources, Government of India. PyWRIS is an independent project and is not affiliated with or endorsed by the Ministry of Water Resources, Government of India. Please ensure compliance with the terms of use for any data accessed through the India WRIS platform.
 
 ## Contribution Taxonomy (note to teammates: please add/edit your contributions!)
+Ishaan:
+- Documentation
+- code review
+- set up directory
+- wrote user stories
+- set up .toml file
+  
+Sanchit:
+- Conceptualisation
+- PyWRIS core functionality
+- code review
+- set up directory
+- wrote user stories
+- added use cases/components
+- set up .toml file
+  
 Sarath:
-- wrote Python functions
+- Conceptualisation
+- PyWRIS core functionality
 - code review
 - set up directory
 - wrote user stories
 - set up .toml file
 
 Shahzaib:
-- wrote Python functions
+- Plotting functionality
 - code review
 - set up directory
 - wrote user stories
 - added use cases/components
-- set up .toml file
-
-Sanchit:
-- wrote Python functions
-- code review
-- set up directory
-- wrote user stories
-- added use cases/components
-- set up .toml file
-
-Ishaan:
-- wrote documentation
-- code review
-- set up directory
-- wrote user stories
 - set up .toml file
