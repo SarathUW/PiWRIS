@@ -2,18 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://sarathuw.github.io/PyWRIS/</loc>
-         <lastmod>2024-12-10</lastmod>
+         <lastmod>2024-12-11</lastmod>
     </url>
     <url>
          <loc>https://sarathuw.github.io/PyWRIS/commands/</loc>
-         <lastmod>2024-12-10</lastmod>
+         <lastmod>2024-12-11</lastmod>
     </url>
     <url>
          <loc>https://sarathuw.github.io/PyWRIS/dir/</loc>
-         <lastmod>2024-12-10</lastmod>
+         <lastmod>2024-12-11</lastmod>
+    </url>
+    <url>
+         <loc>https://sarathuw.github.io/PyWRIS/explanation/</loc>
+         <lastmod>2024-12-11</lastmod>
+    </url>
+    <url>
+         <loc>https://sarathuw.github.io/PyWRIS/howto/</loc>
+         <lastmod>2024-12-11</lastmod>
     </url>
     <url>
          <loc>https://sarathuw.github.io/PyWRIS/tutorials/</loc>
-         <lastmod>2024-12-10</lastmod>
+         <lastmod>2024-12-11</lastmod>
     </url>
 </urlset>
