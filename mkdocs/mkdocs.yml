@@ -3,9 +3,9 @@ site_url: https://sarathuw.github.io/PyWRIS/
 theme:
   name: "readthedocs"
 nav:
+  - What is PyWRIS?: explanation.md
   - Home: index.md
   - Commands: commands.md
   - Project Layout: dir.md
   - Tutorials: tutorials.md
   - How-Tos: howto.md
-  - What is PyWRIS?: explanation.md
