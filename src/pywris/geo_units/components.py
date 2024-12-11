@@ -75,7 +75,7 @@ class District(State):
         Generate an interactive HTML representation for Jupyter.
         """
         # HTML Header for District
-        html = f"<p>District: {self.district_name}<br>"
+        html = """<p style="margin-left: 20px; margin-top:0;">"""
         html += f"District Code: {self.district_code if self.district_code else 'N/A'}<br>"
         html += f"Area: {self.district_area if self.district_area else 'N/A'} km²<br>"
         # Uncomment the line below if you want to include the length

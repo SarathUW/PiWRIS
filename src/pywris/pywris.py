@@ -65,8 +65,8 @@ class HydroFrame:
 
     
         if self.reservoirs:
-            html+="<br>Downloaded Data: Reservoirs<br>"
-            html+=f"Total count: {len(self.reservoirs)}<br>"
+            html+=f"<br>Downloaded Data: Reservoirs"
+            html+=f"<br>Reservoir count: {len(self.reservoirs)}<br>"
         # html = """
         #     <div style="
         #         background-color: black; 
@@ -99,7 +99,7 @@ class HydroFrame:
                 if state_reservoirs:
                     html += f"""
                     <details>
-                        <summary><strong>Reservoirs ({len(state_reservoirs)}):</strong></summary>
+                        <summary>Reservoirs ({len(state_reservoirs)}):</summary>
                         <div style="margin-left: 20px;">
                     """
                     for res_obj in state_reservoirs:
@@ -138,9 +138,9 @@ class HydroFrame:
 
         if self.reservoirs:
             html+="<br><br>Quick help: Reservoir data:"
-            html+="<br>- HydroFrame.reservoirs: Dictionary of Reservoir objects"
-            html+="<br>- HydroFrame.reservoir_df_static: DataFrame of static reservoir data"
-            html+="<br>- HydroFrame.reservoir_rawData: DataFrame of complete reservoir data"
+            html+="<br>- HydroFrame.reservoirs:<i> Dictionary of Reservoir objects</i>"
+            html+="<br>- HydroFrame.reservoir_df_static:<i> DataFrame of static reservoir data</i>"
+            html+="<br>- HydroFrame.reservoir_rawData:<i> DataFrame of complete reservoir data</i>"
 
         html+= "<br>---------------------------------------------------------------------------"
         return html

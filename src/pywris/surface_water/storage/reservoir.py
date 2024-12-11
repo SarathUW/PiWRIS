@@ -51,22 +51,20 @@ class Reservoir:
         """
         Generate an interactive HTML representation for Jupyter.
         """
-        # Start the HTML representation
-        html = f"<h3>Reservoir: {self.reservoir_name}</h3>"
-
+        
         # Reservoir details
-        html += """
-        <ul>
-            <li><strong>State:</strong> {state}</li>
-            <li><strong>District:</strong> {district}</li>
-            <li><strong>Latitude:</strong> {latitude}</li>
-            <li><strong>Longitude:</strong> {longitude}</li>
-            <li><strong>FRL:</strong> {frl}</li>
-            <li><strong>Live Capacity (FRL):</strong> {live_cap_frl}</li>
-            <li><strong>Agency:</strong> {agency}</li>
-            <li><strong>Block:</strong> {block}</li>
-            <li><strong>Sub-Basin:</strong> {sub_basin}</li>
-            <li><strong>Basin:</strong> {basin}</li>
+        html = """ <div style="margin-left: 20px; margin-bottom: 0"> Static Data <br> </div>
+        <ul style='margin-top: 0; list-style-type: none'>
+            <li>- State: {state}</li>
+            <li>- District: {district}</li>
+            <li>- Latitude: {latitude}&deg</li>
+            <li>- Longitude: {longitude}&deg</li>
+            <li>- FRL: {frl} m</li>
+            <li>- Live Capacity (FRL): {live_cap_frl} Million Cubic Meters</li>
+            <li>- Agency: {agency}</li>
+            <li>- Block: {block}</li>
+            <li>- Sub-Basin: {sub_basin}</li>
+            <li>- Basin: {basin}</li>
         </ul>
         """.format(
             state=self.state.state_name if self.state else "N/A",
@@ -84,24 +82,26 @@ class Reservoir:
         # Add DataFrame representation if it exists
         if self.data is not None and isinstance(self.data, pd.DataFrame):
             html += """
-            <h4>Reservoir Data (Preview):</h4>
+            <div style="margin-left: 20px; margin-bottom: 0"> Live Data (preview) <br> <i>pandas.dataFrame</i> </div>
             <div style="overflow-x: auto; padding-left: 20px;">
             {}
             </div>
-            """.format(self.data.head(3).to_html(index=False, classes="dataframe"))
+            """.format(self.data.tail(4).to_html(index=False, classes="dataframe"))
 
         # Add attribute descriptions
         html += """
-        <h4 style='margin-bottom: 0;'>Attribute Descriptions</h4>
-        <ul style='margin-top: 0;'>
-            <li><strong>Reservoir Name:</strong> Name of the reservoir</li>
-            <li><strong>State:</strong> State where the reservoir is located</li>
-            <li><strong>District:</strong> District where the reservoir is located</li>
-            <li><strong>Latitude:</strong> Latitude of the reservoir</li>
-            <li><strong>Longitude:</strong> Longitude of the reservoir</li>
-            <li><strong>FRL:</strong> Full reservoir level</li>
-            <li><strong>Live Capacity (FRL):</strong> Live storage capacity at FRL</li>
+        <div style="margin-left: 20px; margin-bottom: 0"> <br>Attribute Description<br> </div>
+        <ul style="margin-top: 0; margin-left: 20px; list-style-type: none; padding-left: 0;">
+            <li>- State:<i> State where the reservoir is located</i></li>
+            <li>- District:<i> District where the reservoir is located</i></li>
+            <li>- Latitude:<i> Latitude of the reservoir</i></li>
+            <li>- Longitude:<i> Longitude of the reservoir</i></li>
+            <li>- FRL:<i> Full reservoir level</i></li>
+            <li>- Live Capacity (FRL):<i> Live storage capacity at FRL</i></li>
+            <li>- Agency:<i> Agency reporting the reservoir data</i></li>
+            <li>- Block:<i> Administrative block where the reservoir is located</i></li>
         </ul>
+
         """
 
         return html
