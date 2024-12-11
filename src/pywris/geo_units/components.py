@@ -22,7 +22,41 @@ class State:
             return None
         
     def fetch_districts(self):
-        self.districts = get_districts([self.state_name])
+        self.districts = get_districts([self.state_name])  # Assume `get_districts` returns a dict of district_name -> District objects
+
+    def _repr_html_(self):
+        """
+        Generate an interactive HTML representation for Jupyter.
+        """
+        # HTML Header for State
+        html = f"State ID: {self.state_id if self.state_id else 'N/A'}<br>"
+
+        # Fetch districts if not already fetched
+        if not self.districts:
+            self.fetch_districts()
+        
+        # Representing districts as expandable details
+        html += f"""
+        
+            Districts ({len(self.districts)}):
+            <div style="margin-left: 20px;">  <!-- Adds indentation without bullets -->
+        """
+        for district_name, district_obj in self.districts.items():
+            html += f"""
+            <details>
+                <summary>{district_name}</summary>
+                {district_obj._repr_html_() if hasattr(district_obj, '_repr_html_') else '<p>No details available</p>'}
+            </details>
+            """
+        html += "</div></details>"
+
+        return html
+
+
+
+
+
+
 
 class District(State):
     def __init__(
@@ -33,7 +67,21 @@ class District(State):
         self.district_code = int(code) if code is not None else code
         self.district_area = float(area) if area is not None else area
         self.district_length = float(length) if length is not None else length
-        self.reservoirs = []
+
+    def _repr_html_(self):
+        """
+        Generate an interactive HTML representation for Jupyter.
+        """
+        # HTML Header for District
+        html = f"<p>District: {self.district_name}<br>"
+        html += f"District Code: {self.district_code if self.district_code else 'N/A'}<br>"
+        html += f"Area: {self.district_area if self.district_area else 'N/A'} km²<br>"
+        # Uncomment the line below if you want to include the length
+        # html += f"Length: {self.district_length if self.district_length else 'N/A'} km<br>"
+        html += "</p>"
+        return html
+
+
     
 
 class Basin:
