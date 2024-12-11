@@ -29,7 +29,8 @@ class State:
         Generate an interactive HTML representation for Jupyter.
         """
         # HTML Header for State
-        html = f"State ID: {self.state_id if self.state_id else 'N/A'}<br>"
+        html = """<div style="margin-left: 20px;">"""
+        html += f"State ID: {self.state_id if self.state_id else 'N/A'}<br>"
 
         # Fetch districts if not already fetched
         if not self.districts:
@@ -37,9 +38,9 @@ class State:
         
         # Representing districts as expandable details
         html += f"""
-        
-            Districts ({len(self.districts)}):
-            <div style="margin-left: 20px;">  <!-- Adds indentation without bullets -->
+        <details>
+            <summary>Districts ({len(self.districts)})</summary>
+            <div style="margin-left: 20px;"> 
         """
         for district_name, district_obj in self.districts.items():
             html += f"""
@@ -49,8 +50,9 @@ class State:
             </details>
             """
         html += "</div></details>"
-
+        html += "</div>"
         return html
+
 
 
 

@@ -10,6 +10,14 @@ from pywris.static_data.request_urls import requests_config
 from pywris.visualization.plot import plot_data
 import pywris.geo_units.components as geo_components
 
+class ReservoirCollection:
+    def __init__(self, reservoirs):
+        """
+        Initialize with a dictionary of Reservoir objects.
+        """
+        self.reservoirs = reservoirs
+
+   
 
 class Reservoir:
     def __init__(self, reservoir_name, state, district=None):
@@ -38,6 +46,66 @@ class Reservoir:
         - **args: Arguments that will be passed to the general plot function
         """
         plot_data(self, **args)
+    
+    def _repr_html_(self):
+        """
+        Generate an interactive HTML representation for Jupyter.
+        """
+        # Start the HTML representation
+        html = f"<h3>Reservoir: {self.reservoir_name}</h3>"
+
+        # Reservoir details
+        html += """
+        <ul>
+            <li><strong>State:</strong> {state}</li>
+            <li><strong>District:</strong> {district}</li>
+            <li><strong>Latitude:</strong> {latitude}</li>
+            <li><strong>Longitude:</strong> {longitude}</li>
+            <li><strong>FRL:</strong> {frl}</li>
+            <li><strong>Live Capacity (FRL):</strong> {live_cap_frl}</li>
+            <li><strong>Agency:</strong> {agency}</li>
+            <li><strong>Block:</strong> {block}</li>
+            <li><strong>Sub-Basin:</strong> {sub_basin}</li>
+            <li><strong>Basin:</strong> {basin}</li>
+        </ul>
+        """.format(
+            state=self.state.state_name if self.state else "N/A",
+            district=self.district.district_name if self.district else "N/A",
+            latitude=self.latitude if self.latitude else "N/A",
+            longitude=self.longitude if self.longitude else "N/A",
+            frl=self.frl if self.frl else "N/A",
+            live_cap_frl=self.live_cap_frl if self.live_cap_frl else "N/A",
+            agency=self.agency if self.agency else "N/A",
+            block=self.block_name if self.block_name else "N/A",
+            sub_basin=self.sub_basin_name if self.sub_basin_name else "N/A",
+            basin=self.basin if self.basin else "N/A",
+        )
+
+        # Add DataFrame representation if it exists
+        if self.data is not None and isinstance(self.data, pd.DataFrame):
+            html += """
+            <h4>Reservoir Data (Preview):</h4>
+            <div style="overflow-x: auto; padding-left: 20px;">
+            {}
+            </div>
+            """.format(self.data.head(3).to_html(index=False, classes="dataframe"))
+
+        # Add attribute descriptions
+        html += """
+        <h4 style='margin-bottom: 0;'>Attribute Descriptions</h4>
+        <ul style='margin-top: 0;'>
+            <li><strong>Reservoir Name:</strong> Name of the reservoir</li>
+            <li><strong>State:</strong> State where the reservoir is located</li>
+            <li><strong>District:</strong> District where the reservoir is located</li>
+            <li><strong>Latitude:</strong> Latitude of the reservoir</li>
+            <li><strong>Longitude:</strong> Longitude of the reservoir</li>
+            <li><strong>FRL:</strong> Full reservoir level</li>
+            <li><strong>Live Capacity (FRL):</strong> Live storage capacity at FRL</li>
+        </ul>
+        """
+
+        return html
+
 
 
 def get_reservoirs(
@@ -223,7 +291,7 @@ def get_reservoirs(
         reservoir_combined_df = reservoir_info_df.merge(reservoir_data_df_drop_dl, how='left', left_on='attributes.station_name', right_on='Reservoir Name')
         # Rename columns names to attribute names
         
-    return reservoirs, reservoir_combined_df
+    return reservoirs, reservoir_combined_df, reservoir_data_df
 
 def get_reservoir_names(states_list_str,district_names_list_str):
     """
