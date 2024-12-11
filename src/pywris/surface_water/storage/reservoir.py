@@ -9,6 +9,9 @@ from pywris.static_data.state_ids import state_id
 from pywris.static_data.request_urls import requests_config
 from pywris.visualization.plot import plot_data
 import pywris.geo_units.components as geo_components
+from shapely.geometry import Point
+import geopandas as gpd
+
 
 class ReservoirCollection:
     def __init__(self, reservoirs):
@@ -60,7 +63,7 @@ class Reservoir:
             <li>- Latitude: {latitude}&deg</li>
             <li>- Longitude: {longitude}&deg</li>
             <li>- FRL: {frl} m</li>
-            <li>- Live Capacity (FRL): {live_cap_frl} Million Cubic Meters</li>
+            <li>- Live Capacity (FRL): {live_cap_frl} MCM</li>
             <li>- Agency: {agency}</li>
             <li>- Block: {block}</li>
             <li>- Sub-Basin: {sub_basin}</li>
@@ -96,8 +99,8 @@ class Reservoir:
             <li>- District:<i> District where the reservoir is located</i></li>
             <li>- Latitude:<i> Latitude of the reservoir</i></li>
             <li>- Longitude:<i> Longitude of the reservoir</i></li>
-            <li>- FRL:<i> Full reservoir level</i></li>
-            <li>- Live Capacity (FRL):<i> Live storage capacity at FRL</i></li>
+            <li>- FRL:<i> Full reservoir level in meters</i></li>
+            <li>- Live Capacity (FRL):<i> Live storage capacity at FRL in Million Cubic Meters</i></li>
             <li>- Agency:<i> Agency reporting the reservoir data</i></li>
             <li>- Block:<i> Administrative block where the reservoir is located</i></li>
         </ul>
@@ -287,11 +290,35 @@ def get_reservoirs(
         reservoirs[res_name] = sel_res
         
         # Return the comined dataframe as well
-        reservoir_data_df_drop_dl  = reservoir_data_df.drop_duplicates(subset=['Reservoir Name'],keep='last')
+        reservoir_data_df_drop_dl = reservoir_data_df.drop_duplicates(subset=['Reservoir Name'],keep='last')
         reservoir_combined_df = reservoir_info_df.merge(reservoir_data_df_drop_dl, how='left', left_on='attributes.station_name', right_on='Reservoir Name')
         # Rename columns names to attribute names
+
+        # Dropping and renaming columns from reservoir_combined_df
+        required_columns = {
+            'attributes.station_name':'reservoir_name',
+            'attributes.lat':'latitude',
+            'attributes.long':'longitude',
+            'attributes.agency_name':'agency',
+            'attributes.state_name':'state',
+            'attributes.state_code':'state_code',
+            'attributes.district_name':'district',
+            'attributes.block_name':'block_name',
+            'attributes.basin_name':'basin',
+            'attributes.sub_basin_name':'sub_basin',
+            'attributes.dam_code':'dam_code',
+            'attributes.frl':'frl',
+            'attributes.lsc_frl':'live_cap_frl',
+        }
+        reservoir_combined_formatted = reservoir_combined_df[list(required_columns.keys())].rename(columns=required_columns)
+       
+        #Converting to a geodataframe
+        reservoir_combined_formatted['geometry'] = reservoir_combined_formatted.apply(lambda row: 
+        Point(row['longitude'], row['latitude']), axis=1)
+        reservoir_combined_gdf = gpd.GeoDataFrame(reservoir_combined_formatted,geometry='geometry',
+        crs="EPSG:4326")
         
-    return reservoirs, reservoir_combined_df, reservoir_data_df
+    return reservoirs, reservoir_combined_gdf, reservoir_data_df
 
 def get_reservoir_names(states_list_str,district_names_list_str):
     """

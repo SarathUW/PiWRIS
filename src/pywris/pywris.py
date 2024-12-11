@@ -10,7 +10,7 @@ class HydroFrame:
         self.states = {}
         self.basins = {}
         self.reservoirs = {}
-        self.reservoir_df_static = None
+        self.reservoir_gdf = None
         self.reservoir_rawData = None
         
         ## Validate input 
@@ -40,9 +40,9 @@ class HydroFrame:
             
     def fetch_reservoir_data(self, end_date, start_date='1991-01-01', timestep='Daily'):
         if self.states.keys():
-            self.reservoirs, self.reservoir_df_static, self.reservoir_rawData = py_reservoir.get_reservoirs(end_date, start_date, timestep, selected_states=list(self.states.keys()))
+            self.reservoirs, self.reservoir_gdf, self.reservoir_rawData = py_reservoir.get_reservoirs(end_date, start_date, timestep, selected_states=list(self.states.keys()))
         elif self.basins.keys():
-            self.reservoirs, self.reservoir_df_static, self.reservoir_rawData = py_reservoir.get_reservoirs(end_date, start_date, timestep, selected_basins=list(self.basins.keys()))
+            self.reservoirs, self.reservoir_gdf, self.reservoir_rawData = py_reservoir.get_reservoirs(end_date, start_date, timestep, selected_basins=list(self.basins.keys()))
         else:
             raise ValueError("No states or basins defined in the HydroFrame.")
     
@@ -59,13 +59,13 @@ class HydroFrame:
         """
         Generate an interactive HTML representation of PyWRIS HydroFrame Jupyter.
         """
-        html = "---------------------------------------------------------------------------"
+        html = "----------------------------------------------------------------------------------------------------------------"
         html += f"<h1 style='margin-bottom: 0; margin-top: 0;'>PyWRIS HydroFrame</h1>"
-        html += "---------------------------------------------------------------------------"
+        html += "----------------------------------------------------------------------------------------------------------------"
 
     
         if self.reservoirs:
-            html+=f"<br>Downloaded Data: Reservoirs"
+            html+=f"<br>Downloaded Data: <strong>Reservoirs</strong>"
             html+=f"<br>Reservoir count: {len(self.reservoirs)}<br>"
         # html = """
         #     <div style="
@@ -115,8 +115,7 @@ class HydroFrame:
 
                 html += "</div></details>"
 
-                
-            
+         
         else:
             pass
 
@@ -134,15 +133,25 @@ class HydroFrame:
             pass
 
         if not self.basins and not self.states:
-            html += "<p>*HydroFrame is currently empty as it has not been initialised with states.<br> Please pass a list of states to HydroFrame.add_state() to populate.</p>"
+            html += "<p>HydroFrame is currently empty as it has not been initialised with states.<br> Please pass a list of states to HydroFrame.add_state() to populate.</p>"
 
         if self.reservoirs:
-            html+="<br><br>Quick help: Reservoir data:"
-            html+="<br>- HydroFrame.reservoirs:<i> Dictionary of Reservoir objects</i>"
-            html+="<br>- HydroFrame.reservoir_df_static:<i> DataFrame of static reservoir data</i>"
-            html+="<br>- HydroFrame.reservoir_rawData:<i> DataFrame of complete reservoir data</i>"
-
-        html+= "<br>---------------------------------------------------------------------------"
+            html += "<br><br>Quick help:<br>Reservoir data:"
+            html += "<br>- HydroFrame.reservoirs:<i> Dictionary of Reservoir objects</i>"
+            html += "<br>- HydroFrame.reservoir_gdf:<i> GeoDataFrame of static reservoir data</i>"
+            html += "<br>- HydroFrame.reservoir_rawData:<i> DataFrame of complete reservoir data</i>"
+            html += """ <div style="margin-bottom: 0">- Preset Plots: <br> </div>
+                <ul style='margin-top: 0; margin-left:1; list-style-type: none'>
+                    <li>- HydroFrame.reservoir_gdf.explore():<i> Interactive map with reservoir data</i> </li>
+                    <li>- HydroFrame.reservoirs['Reservoir Name'].plot():<i> Time Series plots of individual reservoir data</i></li>
+                </ul>
+                """
+        html += """
+        <a href='https://sarathuw.github.io/PyWRIS/' style='color: inherit; text-decoration: none;'>
+        <i>Click</i> for PyWRIS documentation
+        </a>
+        """
+        html += "<br>----------------------------------------------------------------------------------------------------------------"
         return html
 
 
@@ -161,14 +170,14 @@ class HydroFrame:
 
         if on == 'reservoir':
             if values is not None:
-                filtered_df = hf.reservoir_df_static[hf.reservoir_df_static[by] in values]
+                filtered_df = hf.reservoir_gdf[hf.reservoir_gdf[by] in values]
             else:
-                filtered_df = hf.reservoir_df_static[hf.reservoir_df_static[by] >= range[0]] & hf.reservoir_df_static[hf.reservoir_df_static[by] <= range[1]]
+                filtered_df = hf.reservoir_gdf[hf.reservoir_gdf[by] >= range[0]] & hf.reservoir_gdf[hf.reservoir_gdf[by] <= range[1]]
         else:
             raise ValueError("Invalid filter on.")
             
         filtered_hf = HydroFrame()
-        filtered_hf.reservoir_df_static = filtered_df
+        filtered_hf.reservoir_gdf = filtered_df
         filtered_hf.states =  {key: hf.states[key] for key in filtered_df['state'].unique() if key in hf.states}
         filtered_hf.basins =  {key: hf.basins[key] for key in filtered_df['basin'].unique() if key in hf.basins}
         filtered_hf.reservoirs = {key: hf.reservoirs[key] for key in filtered_df['reservoir_name'].unique() if key in hf.reservoirs}
@@ -179,6 +188,6 @@ class HydroFrame:
 ## Things to DO:
 ## 1. Add representation to individual classes of State, Reservoir and District.
 ## 2. Adjust indentation and padding in HydroFrame representation
-## 3. Renaming of columns in reservoir_df_static
+## 3. Renaming of columns in reservoir_gdf
 ## 4. Pytests
 
