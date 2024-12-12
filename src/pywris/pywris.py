@@ -3,6 +3,8 @@ import pandas as pd
 
 import pywris.geo_units.components as geo_components
 import pywris.surface_water.storage.reservoir as py_reservoir
+from pywris.static_data.state_ids import state_id
+
 
 class HydroFrame:
 
@@ -12,6 +14,7 @@ class HydroFrame:
         self.reservoirs = {}
         self.reservoir_gdf = None
         self.reservoir_rawData = None
+        self.selection_allStatte = False
         
         ## Validate input 
         if states is not None:
@@ -31,7 +34,13 @@ class HydroFrame:
             geo_components.check_valid_states(state_names)
             for state in state_names:
                 self.states[state] = geo_components.State(state)
+        elif state_names == 'all':
+            self.selection_allStatte = True
+            state_names_all = list(state_id.keys())
+            for state in state_names_all:
+                self.states[state] = geo_components.State(state)
         else:
+
             self.states[state_names] = geo_components.State(state_names)
         
     def add_reservoir(self, reservoir_name, state_name):
@@ -39,7 +48,9 @@ class HydroFrame:
             self.reservoirs[reservoir_name] = geo_components.Reservoir(reservoir_name, state_name)
             
     def fetch_reservoir_data(self, end_date, start_date='1991-01-01', timestep='Daily'):
-        if self.states.keys():
+        if self.selection_allStatte:
+            self.reservoirs, self.reservoir_gdf, self.reservoir_rawData = py_reservoir.get_reservoirs(end_date, start_date, timestep, selected_states='all')
+        elif self.states.keys():
             self.reservoirs, self.reservoir_gdf, self.reservoir_rawData = py_reservoir.get_reservoirs(end_date, start_date, timestep, selected_states=list(self.states.keys()))
         elif self.basins.keys():
             self.reservoirs, self.reservoir_gdf, self.reservoir_rawData = py_reservoir.get_reservoirs(end_date, start_date, timestep, selected_basins=list(self.basins.keys()))
@@ -80,7 +91,7 @@ class HydroFrame:
         
         # States Section
         if self.states:
-            html += f"<h3 style='margin-bottom: 0;'>States: ({len(self.states)})</h3>"
+            html += f"<h3 style='margin-bottom: 0;'>States/UT's: ({len(self.states)})</h3>"
             for state_name, state_obj in self.states.items():
                 html += f"""
                 <details>
