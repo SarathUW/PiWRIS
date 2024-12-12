@@ -41,4 +41,3 @@ This page lists all avilable functions. For example usage, please see the [Tutor
 * `hydroframe.reservoir_gdf` - get static reservoir data in GeoDataFrame
     * `.explore()` - generate interactive map with reservoir data
 * `hydroframe.reservoir_rawData` - get complete reservoir data
-

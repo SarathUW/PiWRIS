@@ -66,3 +66,17 @@ plot_timeseries - plot_reservoir(
     title = "An interactive timeseries plot"
 )
 ```
+
+## Hydroframe
+
+### List reservoirs currently in hydroframe
+
+```
+hf1.reservoirs
+```
+
+### Plot timeseries data for a specific reservoir
+
+```
+hf1.reservoir['Idamalayar Reservoir'].plot()
+```
