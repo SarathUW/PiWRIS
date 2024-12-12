@@ -56,6 +56,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#plotting">Plotting</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#hydroframe">Hydroframe</a>
+    </li>
     </ul>
                 </li>
               </ul>
@@ -140,6 +142,18 @@
 <li>title: custom title for the plot</li>
 </ul>
 </li>
+</ul>
+<h3 id="hydroframe">Hydroframe</h3>
+<ul>
+<li><code>hydroframe.reservoirs</code> - get dictionary of reservoirs currently in hydroframe<ul>
+<li><code>['reservoir_name'].plot()</code> - generate time series plot for selected reservoir in hydroframe</li>
+</ul>
+</li>
+<li><code>hydroframe.reservoir_gdf</code> - get static reservoir data in GeoDataFrame<ul>
+<li><code>.explore()</code> - generate interactive map with reservoir data</li>
+</ul>
+</li>
+<li><code>hydroframe.reservoir_rawData</code> - get complete reservoir data</li>
 </ul>
               
             </div>
