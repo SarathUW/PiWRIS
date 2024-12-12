@@ -84,6 +84,7 @@ Sanchit:
 Sarath:
 - Conceptualisation
 - PyWRIS core functionality
+- Unit Tests
 - Plotting functionality
 - code review
 - set up directory
@@ -93,6 +94,7 @@ Sarath:
 Shahzaib:
 - Plotting functionality
 - code review
+- plotting tests 
 - set up directory
 - wrote user stories
 - added use cases/components

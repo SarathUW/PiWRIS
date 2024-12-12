@@ -13,15 +13,6 @@ from shapely.geometry import Point
 import geopandas as gpd
 
 
-class ReservoirCollection:
-    def __init__(self, reservoirs):
-        """
-        Initialize with a dictionary of Reservoir objects.
-        """
-        self.reservoirs = reservoirs
-
-   
-
 class Reservoir:
     def __init__(self, reservoir_name, state, district=None):
         self.reservoir_name = reservoir_name
@@ -37,9 +28,7 @@ class Reservoir:
         self.frl = None
         self.live_cap_frl = None
         self.data = None
-        
-    def fetch_data(self):
-        pass
+
 
     def plot(self, **args):
         """
@@ -106,7 +95,6 @@ class Reservoir:
         </ul>
 
         """
-
         return html
 
 

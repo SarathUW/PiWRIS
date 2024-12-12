@@ -1,6 +1,7 @@
 import pandas as pd
 # from IPython.display import display, HTML
 
+import time
 import pywris.geo_units.components as geo_components
 import pywris.surface_water.storage.reservoir as py_reservoir
 from pywris.static_data.state_ids import state_id
@@ -12,9 +13,9 @@ class HydroFrame:
         self.states = {}
         self.basins = {}
         self.reservoirs = {}
-        self.reservoir_gdf = None
-        self.reservoir_rawData = None
-        self.selection_allStatte = False
+        self.reservoirs_gdf = None
+        self.reservoirs_rawData = None
+        self.selection_allState = False
         
         ## Validate input 
         if states is not None:
@@ -35,28 +36,47 @@ class HydroFrame:
             for state in state_names:
                 self.states[state] = geo_components.State(state)
         elif state_names == 'all':
-            self.selection_allStatte = True
+            self.selection_allState = True
             state_names_all = list(state_id.keys())
             for state in state_names_all:
                 self.states[state] = geo_components.State(state)
         else:
-
             self.states[state_names] = geo_components.State(state_names)
         
-    def add_reservoir(self, reservoir_name, state_name):
-        if reservoir_name not in self.reservoirs:
-            self.reservoirs[reservoir_name] = geo_components.Reservoir(reservoir_name, state_name)
+    # def add_reservoir(self, reservoir_name, state_name):
+    #     if reservoir_name not in self.reservoirs:
+    #         self.reservoirs[reservoir_name] = geo_components.Reservoir(reservoir_name, state_name)
             
     def fetch_reservoir_data(self, end_date, start_date='1991-01-01', timestep='Daily'):
-        if self.selection_allStatte:
-            self.reservoirs, self.reservoir_gdf, self.reservoir_rawData = py_reservoir.get_reservoirs(end_date, start_date, timestep, selected_states='all')
+        print("Fetching reservoir data...")
+        start_time = time.time()  # Record the start time
+        
+        if self.selection_allState:
+            self.reservoirs, self.reservoirs_gdf, self.reservoirs_rawData = py_reservoir.get_reservoirs(
+                end_date, start_date, timestep, selected_states='all'
+            )
         elif self.states.keys():
-            self.reservoirs, self.reservoir_gdf, self.reservoir_rawData = py_reservoir.get_reservoirs(end_date, start_date, timestep, selected_states=list(self.states.keys()))
+            
+            self.reservoirs, self.reservoirs_gdf, self.reservoirs_rawData = py_reservoir.get_reservoirs(
+                end_date, start_date, timestep, selected_states=list(self.states.keys())
+            )
         elif self.basins.keys():
-            self.reservoirs, self.reservoir_gdf, self.reservoir_rawData = py_reservoir.get_reservoirs(end_date, start_date, timestep, selected_basins=list(self.basins.keys()))
+            self.reservoirs, self.reservoirs_gdf, self.reservoirs_rawData = py_reservoir.get_reservoirs(
+                end_date, start_date, timestep, selected_basins=list(self.basins.keys())
+            )
         else:
             raise ValueError("No states or basins defined in the HydroFrame.")
-    
+        
+        end_time = time.time()  # Record the end time
+        time_taken = end_time - start_time  # Calculate duration
+        
+        if self.reservoirs:
+            print(f"Reservoir data fetched for {len(self.reservoirs)} reservoirs.")
+        
+            print(f"Time taken: {time_taken:.2f} seconds")
+        else:
+            print("No reservoirs found.")
+
     def filter(self, on, by, range=None, values=None):
         return filter(self, on, by, range, values)
     
@@ -166,10 +186,6 @@ class HydroFrame:
         return html
 
 
-
-    
-
-
     def filter(hf, on, by, range=None, values=None):
         # Validate input
         if values is not None and range is not None:
@@ -181,14 +197,16 @@ class HydroFrame:
 
         if on == 'reservoir':
             if values is not None:
-                filtered_df = hf.reservoir_gdf[hf.reservoir_gdf[by] in values]
+                filtered_df = hf.reservoirs_gdf[hf.reservoirs_gdf[by].isin(values)]
+
             else:
-                filtered_df = hf.reservoir_gdf[hf.reservoir_gdf[by] >= range[0]] & hf.reservoir_gdf[hf.reservoir_gdf[by] <= range[1]]
+                filtered_df = hf.reservoirs_gdf[(hf.reservoirs_gdf[by] >= range[0]) & (hf.reservoirs_gdf[by] <= range[1])]
+
         else:
             raise ValueError("Invalid filter on.")
             
         filtered_hf = HydroFrame()
-        filtered_hf.reservoir_gdf = filtered_df
+        filtered_hf.reservoirs_gdf = filtered_df
         filtered_hf.states =  {key: hf.states[key] for key in filtered_df['state'].unique() if key in hf.states}
         filtered_hf.basins =  {key: hf.basins[key] for key in filtered_df['basin'].unique() if key in hf.basins}
         filtered_hf.reservoirs = {key: hf.reservoirs[key] for key in filtered_df['reservoir_name'].unique() if key in hf.reservoirs}

@@ -2,7 +2,7 @@ from plotly.subplots import make_subplots
 # from pywris.surface_water.storage.reservoir import Reservoir
 import plotly.graph_objects as go
 import pandas as pd
-import importlib
+
 
 def plot_data(input_object, **args):
     """
@@ -12,7 +12,7 @@ def plot_data(input_object, **args):
     - input_object: The object to plot (either an instance of Reservoir, Groundwater, etc.)
     - **args: Additional arguments for customization (e.g., columns to plot, title, etc.)
     """
-    from pywris.surface_water.storage.reservoir import Reservoir #created a temp fix for circular imports error 
+    from pywris.surface_water.storage.reservoir import Reservoir
     if isinstance(input_object, Reservoir):
         return plot_reservoir(input_object, **args)
     else:

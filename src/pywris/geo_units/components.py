@@ -53,13 +53,6 @@ class State:
         html += "</div>"
         return html
 
-
-
-
-
-
-
-
 class District(State):
     def __init__(
         self, state_name, district_name=None, code=None, area=None, length=None
@@ -82,9 +75,6 @@ class District(State):
         # html += f"Length: {self.district_length if self.district_length else 'N/A'} km<br>"
         html += "</p>"
         return html
-
-
-    
 
 class Basin:
     def __init__(self, basin_name, basin_code=None):
@@ -109,12 +99,12 @@ def get_districts(selected_states):
     states = [State(state_name) for state_name in selected_states]
     state_ids = [state.state_id for state in states]
     state_ids_list_str = "%27%2C%27".join(state_ids)
-    
     # Fetch district data
     # Get url, payload and method
     url = requests_config["geounits"]["get_districts"]["url"]
     payload = deepcopy(requests_config["geounits"]["get_districts"]["payload"])
     payload = payload.format(state_ids_list_str)
+
     method = requests_config["geounits"]["get_districts"]["method"]
     # Send request and get response
     json_response = get_response(url, payload, method, "get_districts")
@@ -154,4 +144,6 @@ def check_valid_states(selected_states):
             if state not in valid_states:
                 raise ValueError(f"{state} is not a valid state. List of valid states: {valid_states}.")
     else:
-        raise ValueError("States must be a list.")
+        raise ValueError("States must be a list.")   
+
+## ToDO: Add support for Basins - current code is a copy of class State
