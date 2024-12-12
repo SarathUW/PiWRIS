@@ -18,6 +18,9 @@
   - Compute key statistical measure for robust quantitative analysis
   - Compare datasets across different geographic entities, water resource types, or temporal ranges to identify trends and patterns.
 
+## Currently Supported Modules
+- **Reservoir Data**: India WRIS -> Surface Water -> Storage -> Reservoir
+
 ## Installation
 
 Follow these steps to install **PyWRIS** and get started:
