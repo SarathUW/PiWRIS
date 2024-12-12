@@ -34,3 +34,11 @@ This page lists all avilable functions. For example usage, please see the [Tutor
 * `plot_reservoir(self, columns, title)` - Create interactive timeseries plot for reservoir data
     - columns: list of columns to plot. If none, it will default to all numeric columns except "Date"
     - title: custom title for the plot
+
+### Hydroframe
+* `hydroframe.reservoirs` - get dictionary of reservoirs currently in hydroframe
+    * `['reservoir_name'].plot()` - generate time series plot for selected reservoir in hydroframe
+* `hydroframe.reservoir_gdf` - get static reservoir data in GeoDataFrame
+    * `.explore()` - generate interactive map with reservoir data
+* `hydroframe.reservoir_rawData` - get complete reservoir data
+
