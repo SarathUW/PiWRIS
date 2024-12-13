@@ -84,6 +84,7 @@ Sanchit:
 Sarath:
 - Conceptualisation
 - PyWRIS core functionality
+- Unit Tests
 - Plotting functionality
 - code review
 - set up directory
