@@ -1,6 +1,7 @@
 import pandas as pd
 # from IPython.display import display, HTML
 
+import time
 import pywris.geo_units.components as geo_components
 import pywris.surface_water.storage.reservoir as py_reservoir
 from pywris.static_data.state_ids import state_id
@@ -12,8 +13,8 @@ class HydroFrame:
         self.states = {}
         self.basins = {}
         self.reservoirs = {}
-        self.reservoir_gdf = None
-        self.reservoir_rawData = None
+        self.reservoirs_gdf = None
+        self.reservoirs_rawData = None
         self.selection_allStatte = False
         
         ## Validate input 
@@ -40,7 +41,6 @@ class HydroFrame:
             for state in state_names_all:
                 self.states[state] = geo_components.State(state)
         else:
-
             self.states[state_names] = geo_components.State(state_names)
         
     def add_reservoir(self, reservoir_name, state_name):
@@ -48,15 +48,35 @@ class HydroFrame:
             self.reservoirs[reservoir_name] = geo_components.Reservoir(reservoir_name, state_name)
             
     def fetch_reservoir_data(self, end_date, start_date='1991-01-01', timestep='Daily'):
+        print("Fetching reservoir data...")
+        start_time = time.time()  # Record the start time
+        
+        
         if self.selection_allStatte:
-            self.reservoirs, self.reservoir_gdf, self.reservoir_rawData = py_reservoir.get_reservoirs(end_date, start_date, timestep, selected_states='all')
+            self.reservoirs, self.reservoirs_gdf, self.reservoirs_rawData = py_reservoir.get_reservoirs(
+                end_date, start_date, timestep, selected_states='all'
+            )
         elif self.states.keys():
-            self.reservoirs, self.reservoir_gdf, self.reservoir_rawData = py_reservoir.get_reservoirs(end_date, start_date, timestep, selected_states=list(self.states.keys()))
+            self.reservoirs, self.reservoirs_gdf, self.reservoirs_rawData = py_reservoir.get_reservoirs(
+                end_date, start_date, timestep, selected_states=list(self.states.keys())
+            )
         elif self.basins.keys():
-            self.reservoirs, self.reservoir_gdf, self.reservoir_rawData = py_reservoir.get_reservoirs(end_date, start_date, timestep, selected_basins=list(self.basins.keys()))
+            self.reservoirs, self.reservoirs_gdf, self.reservoirs_rawData = py_reservoir.get_reservoirs(
+                end_date, start_date, timestep, selected_basins=list(self.basins.keys())
+            )
         else:
             raise ValueError("No states or basins defined in the HydroFrame.")
-    
+        
+        end_time = time.time()  # Record the end time
+        time_taken = end_time - start_time  # Calculate duration
+        
+        if self.reservoirs:
+            print(f"Reservoir data fetched for {len(self.reservoirs)} reservoirs.")
+        
+            print(f"Time taken: {time_taken:.2f} seconds")
+        else:
+            print("No reservoirs found.")
+
     def filter(self, on, by, range=None, values=None):
         return filter(self, on, by, range, values)
     
