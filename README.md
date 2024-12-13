@@ -93,6 +93,7 @@ Sarath:
 Shahzaib:
 - Plotting functionality
 - code review
+- plotting tests 
 - set up directory
 - wrote user stories
 - added use cases/components
