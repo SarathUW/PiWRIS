@@ -1,7 +1,6 @@
 <img src="./docs/logos/PyWRIS_logo.png" alt="logo" width="300" height="auto">
 <p><b style="color:red;">WORK IN PROGRESS</b></p>
 
-
 **_A Python package for accessing India Water Resource and Information System (IndiaWRIS) data_**
 
 [India WRIS](https://indiawris.gov.in/wris/#/) is a rich collection of nation-wide water resource data provided by the Ministry of Water Resource, Government of India. It provides valuable information on various aspects of water resources, including data on river basins, dams, reservoirs, groundwater levels, water quality, and meteorological data. However, accessing this data can be challenging due to the platform's web-based, graphic-heavy front-end. Downloading bulk data for research purposes through this front-end framework is often time consuming and problematic due to slow load times.
@@ -18,7 +17,10 @@
   - Compute key statistical measure for robust quantitative analysis
   - Compare datasets across different geographic entities, water resource types, or temporal ranges to identify trends and patterns.
 
+<img src="./docs/logos/pywris_functionalities.gif" alt="logo" width="auto" height="auto">
+
 ## Currently Supported Modules
+
 - **Reservoir Data**: India WRIS -> Surface Water -> Storage -> Reservoir
 
 ## Installation
@@ -65,14 +67,17 @@ See the full text in [LICENSE](./LICENSE) for more details.
 **Disclaimer**: The India WRIS data accessed by this package is provided and owned by the Ministry of Water Resources, Government of India. PyWRIS is an independent project and is not affiliated with or endorsed by the Ministry of Water Resources, Government of India. Please ensure compliance with the terms of use for any data accessed through the India WRIS platform.
 
 ## Contribution Taxonomy
+
 Ishaan:
+
 - Documentation
 - code review
 - set up directory
 - wrote user stories
 - set up .toml file
-  
+
 Sanchit:
+
 - Conceptualisation
 - PyWRIS core functionality
 - code review
@@ -80,8 +85,9 @@ Sanchit:
 - wrote user stories
 - added use cases/components
 - set up .toml file
-  
+
 Sarath:
+
 - Conceptualisation
 - PyWRIS core functionality
 - Unit Tests
@@ -92,9 +98,10 @@ Sarath:
 - set up .toml file
 
 Shahzaib:
+
 - Plotting functionality
 - code review
-- plotting tests 
+- plotting tests
 - set up directory
 - wrote user stories
 - added use cases/components
